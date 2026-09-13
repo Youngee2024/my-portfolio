@@ -1,0 +1,114 @@
+export interface Project {
+  id: string;
+  title: string;
+  category: 'uiux' | 'brand' | 'frontend';
+  categoryLabel: string;
+  description: string;
+  tags: string[];
+  image?: string;
+  caseStudyLink?: string;
+  liveLink?: string;
+  githubLink?: string;
+  featured: boolean;
+}
+
+export const portfolioData: Project[] = [
+  // --- 60% UI/UX & Product Design ---
+  {
+    id: 'pulse',
+    title: 'Pulse Fintech App',
+    category: 'uiux',
+    categoryLabel: 'UI/UX & Product Design',
+    description: 'End-to-end mobile banking application featuring seamless user flows, high-fidelity UI, and scalable design systems.',
+    tags: ['Figma', 'Fintech', 'Design System'],
+    image: '/projects/uiux/pulse.png',
+    featured: true,
+  },
+  {
+    id: 'voya-ui',
+    title: 'Voya Travel Platform',
+    category: 'uiux',
+    categoryLabel: 'UI/UX & Product Design',
+    description: 'Responsive travel booking and itinerary planning website interface.',
+    tags: ['Figma', 'Web UI', 'UX Research'],
+    image: '/projects/uiux/voya.png',
+    featured: true,
+  },
+  {
+    id: 'ar-mechanic',
+    title: 'AR Mechanic App',
+    category: 'uiux',
+    categoryLabel: 'UI/UX & Product Design',
+    description: 'Augmented reality mobile application designed for real-time vehicle diagnostics and visual repair guidance.',
+    tags: ['AR/Spatial UI', 'Mobile App', 'Figma'],
+    image: '/projects/uiux/ar-mechanic.png',
+    featured: true,
+  },
+
+  // --- 20% Brand & Visual Identity ---
+  {
+    id: 'vitalcare',
+    title: 'VitalCare Hospital',
+    category: 'brand',
+    categoryLabel: 'Brand & Visual Identity',
+    description: 'Modern medical brand identity system, typography hierarchy, and healthcare visual communication guidelines.',
+    tags: ['Branding', 'Visual Identity', 'Design System'],
+    image: '/projects/brand/vitalcare.png',
+    featured: false,
+  },
+  {
+    id: 'cropcura',
+    title: 'CROPCURA',
+    category: 'brand',
+    categoryLabel: 'Brand & Visual Identity',
+    description: 'Agricultural technology logo design, brand architecture, and marketing assets.',
+    tags: ['Logo Design', 'AgTech', 'Brand Guidelines'],
+    image: '/projects/brand/cropcura.png',
+    featured: false,
+  },
+  {
+    id: 'sara-handcraft',
+    title: 'Sara Handcraft',
+    category: 'brand',
+    categoryLabel: 'Brand & Visual Identity',
+    description: 'Visual identity system, logo design, and craft brand positioning.',
+    tags: ['Logo Design', 'Typography', 'Branding'],
+    image: '/projects/brand/sara-handcraft.png',
+    featured: false,
+  },
+
+  // --- 20% Frontend & Technical Code ---
+  {
+    id: 'fashion-xpress',
+    title: 'Fashion Xpress',
+    category: 'frontend',
+    categoryLabel: 'Frontend & Technical Code',
+    description: 'Modern e-commerce platform integrated with interactive virtual AR try-on features.',
+    tags: ['React', 'Tailwind CSS', 'Vercel'],
+    image: '/projects/code/fashion-xpress.png',
+    liveLink: 'https://fashion-xpress.vercel.app',
+    featured: true,
+  },
+  {
+    id: 'ai-interviewer',
+    title: 'AI Interviewer Dashboard',
+    category: 'frontend',
+    categoryLabel: 'Frontend & Technical Code',
+    description: 'Candidate evaluation and intelligent interview analytics dashboard.',
+    tags: ['React', 'Tailwind CSS', 'Dashboard'],
+    image: '/projects/code/ai-interviewer.png',
+    liveLink: '#',
+    featured: true,
+  },
+  {
+    id: 'maya-insurance',
+    title: 'Maya Insurance Portal',
+    category: 'frontend',
+    categoryLabel: 'Frontend & Technical Code',
+    description: 'Multi-step insurance claims submission and tracking portal.',
+    tags: ['React', 'Tailwind CSS', 'Web App'],
+    image: '/projects/code/maya-insurance.png',
+    liveLink: '#',
+    featured: true,
+  },
+];
