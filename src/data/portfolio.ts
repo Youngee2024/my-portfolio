@@ -68,7 +68,7 @@ export const portfolioData: Project[] = [
     description: 'Agricultural technology logo design, brand architecture, and marketing assets.',
     tags: ['Logo Design', 'AgTech', 'Brand Guidelines'],
     image: '/projects/brand/cropcura.webp',
-    figmaEmbedUrl: 'https://www.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&t=5B19RBbPjbyvhF3J-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
+    figmaEmbedUrl: '<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&embed-host=share" allowfullscreen></iframe>',
     featured: false,
   },
   {
