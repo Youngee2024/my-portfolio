@@ -166,19 +166,19 @@ export default function Home() {
       <main id="top">
         <section id="hero" className="relative isolate overflow-hidden">
           <div className="absolute top-0 left-1/2 -z-10 h-[42rem] w-[64rem] -translate-x-1/2 rounded-full bg-violet-600/8 blur-3xl" />
-          <div className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-7xl items-center gap-16 px-5 py-24 sm:px-8 lg:grid-cols-[1.25fr_.75fr] lg:px-12 lg:py-28">
-            <div>
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-24 pb-16 lg:grid-cols-12 lg:pt-32">
+            <div className="lg:col-span-7">
               <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-[11px] font-medium tracking-[0.12em] text-zinc-400 uppercase">
                 <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_#34d399]" />
                 Designer who ships
               </div>
-              <h1 className="max-w-5xl text-[clamp(3.25rem,8vw,7.4rem)] leading-[0.88] font-semibold tracking-[-0.065em] text-white">
+              <h1 className="mb-6 max-w-xl text-3xl leading-[1.15] font-bold tracking-tight text-zinc-100 sm:text-4xl lg:text-5xl">
                 {personalInfo.role}
                 <span className="mt-4 block bg-gradient-to-r from-zinc-500 via-zinc-200 to-violet-300 bg-clip-text text-transparent">
                   {personalInfo.name}.
                 </span>
               </h1>
-              <p className="mt-9 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
+              <p className="max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
                 {personalInfo.bio}
               </p>
               <p className="mt-5 max-w-3xl text-xs leading-6 font-medium tracking-wide text-zinc-500 uppercase">
@@ -210,7 +210,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative mx-auto hidden w-full max-w-sm lg:block" aria-hidden="true">
+            <div className="relative mx-auto w-full max-w-sm lg:col-span-5" aria-hidden="true">
               <div className="absolute -inset-12 rounded-full bg-violet-500/10 blur-3xl" />
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-zinc-800 bg-zinc-900/55 p-5 shadow-2xl shadow-black/50">
                 <div className="flex h-full flex-col justify-between rounded-[1.25rem] border border-white/8 bg-[linear-gradient(145deg,#18181b_0%,#09090b_65%)] p-7">
