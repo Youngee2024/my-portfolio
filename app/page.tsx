@@ -164,7 +164,7 @@ export default function Home() {
       </header>
 
       <main id="top">
-        <section id="about" className="relative isolate scroll-mt-24 overflow-hidden">
+        <section id="hero" className="relative isolate overflow-hidden">
           <div className="absolute top-0 left-1/2 -z-10 h-[42rem] w-[64rem] -translate-x-1/2 rounded-full bg-violet-600/8 blur-3xl" />
           <div className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-7xl items-center gap-16 px-5 py-24 sm:px-8 lg:grid-cols-[1.25fr_.75fr] lg:px-12 lg:py-28">
             <div>
@@ -325,10 +325,93 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="about" className="scroll-mt-24 bg-zinc-950 py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+            <div className="flex flex-col gap-5 border-b border-zinc-800 pb-10 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="mb-4 text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">About / 02</p>
+                <h2 className="text-4xl font-semibold tracking-[-0.04em] text-zinc-100 sm:text-6xl">About &amp; Philosophy</h2>
+              </div>
+              <span className="w-fit rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-2 text-xs font-medium text-violet-200">
+                The 60/20/20 Approach
+              </span>
+            </div>
+
+            <p className="mt-12 max-w-5xl text-2xl leading-snug font-medium tracking-[-0.025em] text-zinc-100 sm:text-4xl sm:leading-tight">
+              {personalInfo.bio}
+            </p>
+
+            <div className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+              <div className="grid gap-4 md:grid-cols-3">
+                <article className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-violet-400/35">
+                  <div className="flex items-center justify-between">
+                    <span className="text-3xl font-semibold tracking-[-0.05em] text-violet-300">60%</span>
+                    <PenTool className="size-5 text-zinc-600 transition group-hover:text-violet-300" />
+                  </div>
+                  <h3 className="mt-10 text-lg font-semibold text-zinc-100">UI/UX &amp; Product Design</h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-400">
+                    User research, wireframing, high-fidelity Figma prototypes, and durable design systems that keep products intuitive and consistent.
+                  </p>
+                </article>
+
+                <article className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-amber-400/35">
+                  <div className="flex items-center justify-between">
+                    <span className="text-3xl font-semibold tracking-[-0.05em] text-amber-300">20%</span>
+                    <Palette className="size-5 text-zinc-600 transition group-hover:text-amber-300" />
+                  </div>
+                  <h3 className="mt-10 text-lg font-semibold text-zinc-100">Brand &amp; Visual Systems</h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-400">
+                    Visual identity, logo design, typography, and strategic brand positioning that make every touchpoint feel unmistakably connected.
+                  </p>
+                </article>
+
+                <article className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/35">
+                  <div className="flex items-center justify-between">
+                    <span className="text-3xl font-semibold tracking-[-0.05em] text-cyan-300">20%</span>
+                    <Code2 className="size-5 text-zinc-600 transition group-hover:text-cyan-300" />
+                  </div>
+                  <h3 className="mt-10 text-lg font-semibold text-zinc-100">Frontend Execution</h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-400">
+                    Translating design components into clean, responsive React, Next.js, and Tailwind CSS code built for real-world use.
+                  </p>
+                </article>
+              </div>
+
+              <aside className="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+                <p className="text-xs font-medium tracking-[0.16em] text-zinc-500 uppercase">Quick info</p>
+                <div className="mt-7 flex items-start gap-3 border-b border-zinc-800 pb-6">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-violet-300" />
+                  <div>
+                    <p className="text-xs text-zinc-500">Based in</p>
+                    <p className="mt-1 text-sm font-medium text-zinc-100">{personalInfo.location}</p>
+                  </div>
+                </div>
+                <div className="py-6">
+                  <p className="text-xs text-zinc-500">Core design &amp; dev stack</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Figma", "React", "Next.js", "Tailwind CSS", "Framer", "Vercel"].map((tool) => (
+                      <span key={tool} className="rounded-md border border-zinc-800 bg-zinc-950/70 px-2.5 py-1.5 text-[11px] text-zinc-300">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="group mt-auto inline-flex h-11 items-center justify-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300"
+                >
+                  Get in Touch
+                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </aside>
+            </div>
+          </div>
+        </section>
+
         <section id="capabilities" className="scroll-mt-24 border-y border-zinc-900 bg-zinc-900/20 py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
             <div className="max-w-3xl">
-              <p className="mb-4 text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Capabilities / 02</p>
+              <p className="mb-4 text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Capabilities / 03</p>
               <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white sm:text-6xl">Strategy to screen.<br />Design to deployment.</h2>
             </div>
             <div className="mt-16 grid border-t border-zinc-800 md:grid-cols-3 md:divide-x md:divide-zinc-800">
