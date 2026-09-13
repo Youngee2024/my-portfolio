@@ -9,6 +9,7 @@ export interface Project {
   caseStudyLink?: string;
   liveLink?: string;
   githubLink?: string;
+  figmaEmbedUrl?: string;
   featured: boolean;
 }
 
@@ -22,6 +23,7 @@ export const portfolioData: Project[] = [
     description: 'End-to-end mobile banking application featuring seamless user flows, high-fidelity UI, and scalable design systems.',
     tags: ['Figma', 'Fintech', 'Design System'],
     image: '/projects/uiux/pulse.webp',
+    figmaEmbedUrl: 'https://www.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&t=pPsRMuguKJJjFi30-1&scaling=min-zoom&content-scaling=fixed&page-id=1309%3A8332'
     featured: true,
   },
   {
@@ -42,6 +44,7 @@ export const portfolioData: Project[] = [
     description: 'Augmented reality mobile application designed for real-time vehicle diagnostics and visual repair guidance.',
     tags: ['AR/Spatial UI', 'Mobile App', 'Figma'],
     image: '/projects/uiux/ar-mechanic.webp',
+    figmaEmbedUrl: 'https://www.figma.com/proto/XVz13fJDnrpzWcpFxqjEOn/AR-Assignment?node-id=604-2411&t=DD6UkBoQBm36nj8u-1&scaling=min-zoom&content-scaling=fixed&page-id=491%3A1086',
     featured: true,
   },
 
@@ -54,6 +57,7 @@ export const portfolioData: Project[] = [
     description: 'Modern medical brand identity system, typography hierarchy, and healthcare visual communication guidelines.',
     tags: ['Branding', 'Visual Identity', 'Design System'],
     image: '/projects/brand/vitalcare.webp',
+    figmaEmbedUrl: 'https://www.figma.com/proto/hvrN9zVoVRwJTbiM4Mq0JG/VitalCare-Logo-Branding?node-id=2016-762&t=20nBmG94v16ztRga-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     featured: false,
   },
   {
@@ -64,6 +68,7 @@ export const portfolioData: Project[] = [
     description: 'Agricultural technology logo design, brand architecture, and marketing assets.',
     tags: ['Logo Design', 'AgTech', 'Brand Guidelines'],
     image: '/projects/brand/cropcura.webp',
+    figmaEmbedUrl: 'https://www.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&t=5B19RBbPjbyvhF3J-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1'
     featured: false,
   },
   {

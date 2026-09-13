@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   ArrowDown,
@@ -16,6 +16,7 @@ import {
   Palette,
   Phone,
   PenTool,
+  X,
 } from "lucide-react";
 
 import { personalInfo } from "@/data/personalInfo";
@@ -122,9 +123,43 @@ function ProjectVisual({ project }: { project: Project }) {
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState<Filter>("all");
+  const [selectedFigmaUrl, setSelectedFigmaUrl] = useState<string | null>(null);
+  const [selectedProjectTitle, setSelectedProjectTitle] = useState<string | null>(null);
   const visibleProjects = portfolioData.filter(
     (project) => activeFilter === "all" || project.category === activeFilter,
   );
+
+  const closeFigmaModal = () => {
+    setSelectedFigmaUrl(null);
+    setSelectedProjectTitle(null);
+  };
+
+  const openFigmaModal = (project: Project) => {
+    if (!project.figmaEmbedUrl) return;
+
+    setSelectedFigmaUrl(project.figmaEmbedUrl);
+    setSelectedProjectTitle(project.title);
+  };
+
+  useEffect(() => {
+    if (!selectedFigmaUrl) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedFigmaUrl(null);
+        setSelectedProjectTitle(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedFigmaUrl]);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100 selection:bg-violet-400 selection:text-zinc-950">
@@ -287,7 +322,19 @@ export default function Home() {
               {visibleProjects.map((project) => (
                 <article
                   key={project.id}
-                  className="group flex animate-[fade-in_.35s_ease-out] flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 transition duration-300 hover:-translate-y-1 hover:border-violet-400/35 hover:shadow-[0_20px_60px_-25px_rgba(139,92,246,0.3)]"
+                  role={project.figmaEmbedUrl ? "button" : undefined}
+                  tabIndex={project.figmaEmbedUrl ? 0 : undefined}
+                  aria-label={project.figmaEmbedUrl ? `Open ${project.title} Figma prototype` : undefined}
+                  onClick={() => openFigmaModal(project)}
+                  onKeyDown={(event) => {
+                    if (project.figmaEmbedUrl && (event.key === "Enter" || event.key === " ")) {
+                      event.preventDefault();
+                      openFigmaModal(project);
+                    }
+                  }}
+                  className={`group flex animate-[fade-in_.35s_ease-out] flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 transition duration-300 hover:-translate-y-1 hover:border-violet-400/35 hover:shadow-[0_20px_60px_-25px_rgba(139,92,246,0.3)] ${
+                    project.figmaEmbedUrl ? "cursor-pointer focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:outline-none" : ""
+                  }`}
                 >
                   <ProjectVisual project={project} />
                   <div className="flex flex-1 flex-col p-6">
@@ -307,12 +354,36 @@ export default function Home() {
                     {(project.liveLink || project.caseStudyLink) && (
                       <div className="mt-6 flex flex-wrap gap-5 border-t border-zinc-800 pt-5 text-xs font-semibold">
                         {project.liveLink && (
-                          <a href={project.liveLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-zinc-200 transition hover:text-violet-300">
+                          <a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              if (project.figmaEmbedUrl) {
+                                event.preventDefault();
+                                openFigmaModal(project);
+                              }
+                            }}
+                            className="inline-flex items-center gap-1.5 text-zinc-200 transition hover:text-violet-300"
+                          >
                             Live App <ArrowUpRight className="size-3.5" />
                           </a>
                         )}
                         {project.caseStudyLink && (
-                          <a href={project.caseStudyLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-zinc-200 transition hover:text-violet-300">
+                          <a
+                            href={project.caseStudyLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              if (project.figmaEmbedUrl) {
+                                event.preventDefault();
+                                openFigmaModal(project);
+                              }
+                            }}
+                            className="inline-flex items-center gap-1.5 text-zinc-200 transition hover:text-violet-300"
+                          >
                             View Case Study <ArrowUpRight className="size-3.5" />
                           </a>
                         )}
@@ -456,6 +527,43 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {selectedFigmaUrl && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md md:p-8"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="figma-modal-title"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeFigmaModal();
+          }}
+        >
+          <div className="relative flex h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">
+            <div className="flex shrink-0 items-center justify-between gap-4 border-b border-zinc-800 px-5 py-4 sm:px-6">
+              <div className="min-w-0">
+                <p className="text-[10px] font-medium tracking-[0.16em] text-violet-300 uppercase">Interactive Figma prototype</p>
+                <h2 id="figma-modal-title" className="mt-1 truncate text-sm font-semibold text-zinc-100 sm:text-base">
+                  {selectedProjectTitle}
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={closeFigmaModal}
+                className="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-700 bg-zinc-950/60 text-zinc-400 transition hover:border-zinc-500 hover:text-zinc-100 focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:outline-none"
+                aria-label="Close Figma prototype"
+              >
+                <X className="size-5" />
+              </button>
+            </div>
+            <iframe
+              src={selectedFigmaUrl}
+              title={`${selectedProjectTitle ?? "Project"} Figma prototype`}
+              className="min-h-0 w-full flex-1 border-0 bg-white"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
