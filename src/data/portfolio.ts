@@ -23,7 +23,7 @@ export const portfolioData: Project[] = [
     description: 'End-to-end mobile banking application featuring seamless user flows, high-fidelity UI, and scalable design systems.',
     tags: ['Figma', 'Fintech', 'Design System'],
     image: '/projects/uiux/pulse.webp',
-    figmaEmbedUrl: 'https://www.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&t=pPsRMuguKJJjFi30-1&scaling=min-zoom&content-scaling=fixed&page-id=1309%3A8332'
+    figmaEmbedUrl: 'https://www.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&t=pPsRMuguKJJjFi30-1&scaling=min-zoom&content-scaling=fixed&page-id=1309%3A8332',
     featured: true,
   },
   {
@@ -68,7 +68,7 @@ export const portfolioData: Project[] = [
     description: 'Agricultural technology logo design, brand architecture, and marketing assets.',
     tags: ['Logo Design', 'AgTech', 'Brand Guidelines'],
     image: '/projects/brand/cropcura.webp',
-    figmaEmbedUrl: 'https://www.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&t=5B19RBbPjbyvhF3J-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1'
+    figmaEmbedUrl: 'https://www.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&t=5B19RBbPjbyvhF3J-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     featured: false,
   },
   {
