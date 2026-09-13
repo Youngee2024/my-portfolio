@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -103,11 +104,13 @@ function ProjectVisual({ project }: { project: Project }) {
         </div>
       </div>
       {project.image && !failed ? (
-        // Project paths are data-driven; the fallback stays visible until an asset loads.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={project.image}
           alt={`${project.title} project preview`}
+          width={800}
+          height={450}
+          quality={80}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="absolute inset-0 size-full object-cover transition duration-500 group-hover/visual:scale-[1.03]"
           onError={() => setFailed(true)}
         />

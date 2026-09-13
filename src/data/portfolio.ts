@@ -21,7 +21,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'UI/UX & Product Design',
     description: 'End-to-end mobile banking application featuring seamless user flows, high-fidelity UI, and scalable design systems.',
     tags: ['Figma', 'Fintech', 'Design System'],
-    image: '/projects/uiux/pulse.png',
+    image: '/projects/uiux/pulse.webp',
     featured: true,
   },
   {
@@ -31,7 +31,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'UI/UX & Product Design',
     description: 'Responsive travel booking and itinerary planning website interface.',
     tags: ['Figma', 'Web UI', 'UX Research'],
-    image: '/projects/uiux/voya.png',
+    image: '/projects/uiux/voya.webp',
     featured: true,
   },
   {
@@ -41,7 +41,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'UI/UX & Product Design',
     description: 'Augmented reality mobile application designed for real-time vehicle diagnostics and visual repair guidance.',
     tags: ['AR/Spatial UI', 'Mobile App', 'Figma'],
-    image: '/projects/uiux/ar-mechanic.png',
+    image: '/projects/uiux/ar-mechanic.webp',
     featured: true,
   },
 
@@ -53,7 +53,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'Brand & Visual Identity',
     description: 'Modern medical brand identity system, typography hierarchy, and healthcare visual communication guidelines.',
     tags: ['Branding', 'Visual Identity', 'Design System'],
-    image: '/projects/brand/vitalcare.png',
+    image: '/projects/brand/vitalcare.webp',
     featured: false,
   },
   {
@@ -63,7 +63,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'Brand & Visual Identity',
     description: 'Agricultural technology logo design, brand architecture, and marketing assets.',
     tags: ['Logo Design', 'AgTech', 'Brand Guidelines'],
-    image: '/projects/brand/cropcura.png',
+    image: '/projects/brand/cropcura.webp',
     featured: false,
   },
   {
@@ -73,7 +73,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'Brand & Visual Identity',
     description: 'Visual identity system, logo design, and craft brand positioning.',
     tags: ['Logo Design', 'Typography', 'Branding'],
-    image: '/projects/brand/sara-handcraft.png',
+    image: '/projects/brand/sara-handcraft.webp',
     featured: false,
   },
 
@@ -85,7 +85,7 @@ export const portfolioData: Project[] = [
     categoryLabel: 'Frontend & Technical Code',
     description: 'Modern e-commerce platform integrated with interactive virtual AR try-on features.',
     tags: ['React', 'Tailwind CSS', 'Vercel'],
-    image: '/projects/code/fashion-xpress.png',
+    image: '/projects/code/fashion-xpress.webp',
     liveLink: 'https://fashion-xpress.vercel.app',
     featured: true,
   },
@@ -96,8 +96,8 @@ export const portfolioData: Project[] = [
     categoryLabel: 'Frontend & Technical Code',
     description: 'Candidate evaluation and intelligent interview analytics dashboard.',
     tags: ['React', 'Tailwind CSS', 'Dashboard'],
-    image: '/projects/code/ai-interviewer.png',
-    liveLink: '#',
+    image: '/projects/code/ai-interviewer.webp',
+    liveLink: 'https://ai-interviewer-dashboard-zeta.vercel.app',
     featured: true,
   },
   {
@@ -107,8 +107,8 @@ export const portfolioData: Project[] = [
     categoryLabel: 'Frontend & Technical Code',
     description: 'Multi-step insurance claims submission and tracking portal.',
     tags: ['React', 'Tailwind CSS', 'Web App'],
-    image: '/projects/code/maya-insurance.png',
-    liveLink: '#',
+    image: '/projects/code/maya-insurance.webp',
+    liveLink: 'https://maya-insurance.vercel.app',
     featured: true,
   },
 ];
