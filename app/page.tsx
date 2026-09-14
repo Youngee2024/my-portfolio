@@ -547,7 +547,7 @@ export default function Home() {
             if (event.target === event.currentTarget) closeFigmaModal();
           }}
         >
-          <div className="relative max-w-5xl w-[90vw] h-[85vh] flex flex-col overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl">
+          <div className="relative w-[90vw] max-w-5xl h-[80vh] max-h-[800px] flex flex-col overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl">
             <div className="flex shrink-0 items-center justify-between gap-4 border-b border-zinc-800 px-5 py-4 sm:px-6">
               <div className="min-w-0">
                 <p className="text-[10px] font-medium tracking-[0.16em] text-violet-300 uppercase">Interactive Figma prototype</p>
@@ -564,11 +564,11 @@ export default function Home() {
                 <X className="size-5" />
               </button>
             </div>
-            <div className="w-full h-full min-h-0 flex-1">
+            <div className="relative w-full h-full flex-1 overflow-hidden bg-black">
               <iframe
                 src={selectedFigmaUrl}
                 title={`${selectedProjectTitle ?? "Project"} Figma prototype`}
-                className="w-full h-full border-0"
+                className="absolute inset-0 w-full h-full border-0"
                 allowFullScreen
               />
             </div>

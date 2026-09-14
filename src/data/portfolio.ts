@@ -24,7 +24,7 @@ export const portfolioData: Project[] = [
     description: 'End-to-end mobile banking application featuring seamless user flows, high-fidelity UI, and scalable design systems.',
     tags: ['Figma', 'Fintech', 'Design System'],
     image: '/projects/uiux/pulse.webp',
-    figmaEmbedUrl: 'https://embed.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&scaling=contain&content-scaling=responsive&page-id=1309%3A8332&embed-host=share',
+    figmaEmbedUrl: 'https://embed.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&scaling=contain&content-scaling=fixed&page-id=1309%3A8332&embed-host=share',
     featured: true,
   },
   {
