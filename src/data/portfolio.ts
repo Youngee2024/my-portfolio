@@ -13,10 +13,13 @@ export interface Project {
   githubLink?: string;
   figmaEmbedUrl?: string;
   summary?: string;
+  overview?: string; // Added
   problem?: string;
   research?: string[];
   process?: string[];
   solution?: string;
+  targetAudience?: string[]; // Added
+  challenges?: string[]; // Added
   impact?: string[];
   metrics?: { label: string; value: string }[];
   prototypeUrl?: string;
@@ -87,6 +90,35 @@ export const portfolioData: Project[] = [
     tags: ['AR/Spatial UI', 'Mobile App', 'Figma'],
     image: '/projects/uiux/ar-mechanic.webp',
     figmaEmbedUrl: 'https://embed.figma.com/proto/XVz13fJDnrpzWcpFxqjEOn/AR-Assignment?node-id=604-2411&scaling=scale-down-width&content-scaling=fixed&page-id=491%3A1086&embed-host=share',
+    summary: "An augmented-reality powered mobile application designed to guide everyday drivers through basic car diagnostics and repair procedures.",
+    overview: "AR Mechanic eliminates guesswork, complicated manuals, and expensive shop visits by allowing users to point their phone at their engine bay to receive real-time component detection, diagnostic visualization, and step-by-step repair guidance.",
+    problem: "Car maintenance is confusing and inaccessible to the average driver due to low visibility under the hood, overly technical manuals, high reliance on expensive mechanics for simple fixes, and fear of making critical mistakes.",
+    solution: "An intuitive AR-powered experience that scans engine components, highlights issues visually in real-time, provides clear interactive repair steps, and reduces intimidation through accurate detection and visual safety cues.",
+    targetAudience: [
+    "Primary: Everyday car owners with minimal mechanical experience motivated to fix small issues.",
+    "Secondary: DIY automotive enthusiasts, students in automotive training programs, and roadside assistance teams needing quick mobile diagnostics."
+    ],
+    research: [
+    "72% of drivers feel completely 'lost' when opening their car hood.",
+    "Users strongly prefer 'show-me-where' visual spatial guidance over text-heavy guides.",
+    "Major user anxiety stems from touching the wrong part or causing accidental damage.",
+    "AR overlay features are perceived as high-value, provided detection accuracy and trust are maintained."
+    ],
+    process: [
+    "Deconstructed engine bays to identify high-frequency basic maintenance touchpoints (fluids, battery, filters).",
+    "Developed lightweight spatial UI overlay system to ensure 3D markers don't obstruct real-world components.",
+    "Designed low-confidence fallback states and explicit safety warning UI cues before hands-on repair steps."
+    ],
+    challenges: [
+    "Visualizing complex machinery clearly in varied lighting and real-world AR environments.",
+    "Ensuring HUD and UI elements don't obstruct critical physical components during repair.",
+    "Designing confidence thresholds to communicate when AR detection isn't 100% certain."
+    ],
+    impact: [
+    "Streamlined diagnostic time for basic fluid and battery checks.",
+    "Increased user confidence ratings for self-service car maintenance.",
+    "Reduced repair error anxiety through explicit visual safety checkpoints."
+    ],
     featured: true,
   },
 
