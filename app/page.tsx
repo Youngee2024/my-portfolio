@@ -9,9 +9,11 @@ import {
   Code2,
   CodeXml,
   ContactRound,
+  ExternalLink,
   GalleryHorizontalEnd,
   Mail,
   MapPin,
+  Maximize2,
   Menu,
   Palette,
   Phone,
@@ -351,44 +353,51 @@ export default function Home() {
                         <span key={tag} className="rounded-md bg-zinc-800/80 px-2.5 py-1 text-[11px] text-zinc-400">{tag}</span>
                       ))}
                     </div>
-                    {(project.liveLink || project.caseStudyLink) && (
-                      <div className="mt-6 flex flex-wrap gap-5 border-t border-zinc-800 pt-5 text-xs font-semibold">
-                        {project.liveLink && (
-                          <a
-                            href={project.liveLink}
-                            target="_blank"
-                            rel="noreferrer"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              if (project.figmaEmbedUrl) {
-                                event.preventDefault();
-                                openFigmaModal(project);
-                              }
-                            }}
-                            className="inline-flex items-center gap-1.5 text-zinc-200 transition hover:text-violet-300"
-                          >
-                            Live App <ArrowUpRight className="size-3.5" />
-                          </a>
-                        )}
-                        {project.caseStudyLink && (
-                          <a
-                            href={project.caseStudyLink}
-                            target="_blank"
-                            rel="noreferrer"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              if (project.figmaEmbedUrl) {
-                                event.preventDefault();
-                                openFigmaModal(project);
-                              }
-                            }}
-                            className="inline-flex items-center gap-1.5 text-zinc-200 transition hover:text-violet-300"
-                          >
-                            View Case Study <ArrowUpRight className="size-3.5" />
-                          </a>
-                        )}
-                      </div>
-                    )}
+                    <div className="mt-6 flex min-h-9 flex-wrap items-center gap-5 border-t border-zinc-800 pt-5">
+                      {project.figmaEmbedUrl && (
+                        <button
+                          type="button"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            openFigmaModal(project);
+                          }}
+                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                        >
+                          View Prototype <Maximize2 className="size-3.5" />
+                        </button>
+                      )}
+                      {project.liveLink && !project.figmaEmbedUrl && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(event) => event.stopPropagation()}
+                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                        >
+                          Live App <ExternalLink className="size-3.5" />
+                        </a>
+                      )}
+                      {(project.behanceLink || project.caseStudyLink) && (
+                        <a
+                          href={project.behanceLink ?? project.caseStudyLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(event) => event.stopPropagation()}
+                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                        >
+                          View Case Study <ExternalLink className="size-3.5" />
+                        </a>
+                      )}
+                      {!project.figmaEmbedUrl && !project.liveLink && !project.behanceLink && !project.caseStudyLink && (
+                        <button
+                          type="button"
+                          disabled
+                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white disabled:cursor-not-allowed"
+                        >
+                          Case Study Coming Soon
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </article>
               ))}
