@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { motion, type Variants } from "framer-motion";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -25,6 +26,25 @@ import { personalInfo } from "@/data/personalInfo";
 import { portfolioData, type Project } from "@/data/portfolio";
 
 type Filter = "all" | Project["category"];
+
+const heroContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.1,
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const heroItemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 const filters: { label: string; value: Filter }[] = [
   { label: "All Work", value: "all" },
@@ -204,33 +224,57 @@ export default function Home() {
         <section id="hero" className="relative isolate overflow-hidden">
           <div className="absolute top-0 left-1/2 -z-10 h-[42rem] w-[64rem] -translate-x-1/2 rounded-full bg-violet-600/8 blur-3xl" />
           <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-24 pb-16 lg:grid-cols-12 lg:pt-32">
-            <div className="lg:col-span-7">
-              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-[11px] font-medium tracking-[0.12em] text-zinc-400 uppercase">
+            <motion.div
+              className="lg:col-span-7"
+              initial="hidden"
+              animate="visible"
+              variants={heroContainerVariants}
+            >
+              <motion.div
+                variants={heroItemVariants}
+                className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-[11px] font-medium tracking-[0.12em] text-zinc-400 uppercase"
+              >
                 <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_#34d399]" />
-                Designer who ships
-              </div>
-              <h1 className="mb-6 max-w-xl text-3xl leading-[1.15] font-bold tracking-tight text-zinc-100 sm:text-4xl lg:text-5xl">
-                {personalInfo.role}
+                Available for projects
+              </motion.div>
+              <motion.h1
+                variants={heroItemVariants}
+                className="mb-6 max-w-xl text-3xl leading-[1.15] font-bold tracking-tight text-zinc-100 sm:text-4xl lg:text-5xl"
+              >
+                Designing &amp; building digital experiences
                 <span className="mt-4 block bg-gradient-to-r from-zinc-500 via-zinc-200 to-violet-300 bg-clip-text text-transparent">
-                  {personalInfo.name}.
+                  that work beautifully.
                 </span>
-              </h1>
-              <p className="max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
+              </motion.h1>
+              <motion.p
+                variants={heroItemVariants}
+                className="max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8"
+              >
                 {personalInfo.bio}
-              </p>
-              <p className="mt-5 max-w-3xl text-xs leading-6 font-medium tracking-wide text-zinc-500 uppercase">
+              </motion.p>
+              <motion.p
+                variants={heroItemVariants}
+                className="mt-5 max-w-3xl text-xs leading-6 font-medium tracking-wide text-zinc-500 uppercase"
+              >
                 60% UI/UX &amp; Product Design <span className="mx-2 text-violet-400">•</span>
                 20% Brand &amp; Visual Systems <span className="mx-2 text-violet-400">•</span>
                 20% Frontend &amp; Technical Code
-              </p>
+              </motion.p>
 
-              <div className="mt-10 flex flex-wrap items-center gap-3">
+              <motion.div variants={heroItemVariants} className="mt-10 flex flex-wrap items-center gap-3">
                 <a
                   href="#work"
                   className="group inline-flex h-12 items-center gap-3 rounded-full bg-zinc-100 px-6 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300"
                 >
-                  Explore Work
+                  View Work
                   <ArrowDown className="size-4 transition-transform group-hover:translate-y-0.5" />
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex h-12 items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/50 px-6 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white"
+                >
+                  Contact Me
+                  <Mail className="size-4" />
                 </a>
                 {socialLinks.map(({ label, href, icon: Icon }) => (
                   <a
@@ -244,8 +288,8 @@ export default function Home() {
                     <Icon className="size-4" />
                   </a>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             <div className="relative mx-auto w-full max-w-sm lg:col-span-5" aria-hidden="true">
               <div className="absolute -inset-12 rounded-full bg-violet-500/10 blur-3xl" />
