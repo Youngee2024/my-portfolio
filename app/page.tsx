@@ -3,15 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
+import { SiBehance, SiGithub, SiLinkedin, SiX } from "react-icons/si";
 import {
   ArrowDown,
   ArrowUpRight,
-  AtSign,
   Code2,
-  CodeXml,
-  ContactRound,
   ExternalLink,
-  GalleryHorizontalEnd,
   Mail,
   MapPin,
   Maximize2,
@@ -102,10 +99,10 @@ const capabilities = [
 ];
 
 const socialLinks = [
-  { label: "GitHub", href: personalInfo.socials.github, icon: CodeXml },
-  { label: "LinkedIn", href: personalInfo.socials.linkedin, icon: ContactRound },
-  { label: "Behance", href: personalInfo.socials.behance, icon: GalleryHorizontalEnd },
-  { label: "X / Twitter", href: personalInfo.socials.twitter, icon: AtSign },
+  { label: "GitHub", href: personalInfo.socials.github, icon: SiGithub },
+  { label: "LinkedIn", href: personalInfo.socials.linkedin, icon: SiLinkedin },
+  { label: "Behance", href: personalInfo.socials.behance, icon: SiBehance },
+  { label: "X / Twitter", href: personalInfo.socials.twitter, icon: SiX },
 ].filter((social): social is typeof social & { href: string } => Boolean(social.href));
 
 function ProjectVisual({ project }: { project: Project }) {
@@ -283,9 +280,9 @@ export default function Home() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="grid size-12 place-items-center rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 transition hover:-translate-y-0.5 hover:border-zinc-600 hover:text-white"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
                   >
-                    <Icon className="size-4" />
+                    <Icon className="h-4 w-4" />
                   </a>
                 ))}
               </motion.div>
