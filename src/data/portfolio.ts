@@ -7,6 +7,7 @@ export interface Project {
   tags: string[];
   image?: string;
   caseStudyLink?: string;
+  behanceUrl?: string;
   liveLink?: string;
   githubLink?: string;
   figmaEmbedUrl?: string;

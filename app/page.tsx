@@ -353,7 +353,7 @@ export default function Home() {
                         <span key={tag} className="rounded-md bg-zinc-800/80 px-2.5 py-1 text-[11px] text-zinc-400">{tag}</span>
                       ))}
                     </div>
-                    <div className="mt-6 flex min-h-9 flex-wrap items-center gap-5 border-t border-zinc-800 pt-5">
+                    <div className="mt-6 flex min-h-9 flex-wrap items-center gap-5 border-t border-zinc-800">
                       {project.figmaEmbedUrl && (
                         <button
                           type="button"
@@ -361,10 +361,21 @@ export default function Home() {
                             event.stopPropagation();
                             openFigmaModal(project);
                           }}
-                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                          className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
                         >
                           View Prototype <Maximize2 className="size-3.5" />
                         </button>
+                      )}
+                      {project.behanceUrl && !project.figmaEmbedUrl && (
+                        <a
+                          href={project.behanceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(event) => event.stopPropagation()}
+                          className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                        >
+                          View Case Study <ExternalLink className="size-3.5" />
+                        </a>
                       )}
                       {project.liveLink && !project.figmaEmbedUrl && (
                         <a
@@ -372,27 +383,16 @@ export default function Home() {
                           target="_blank"
                           rel="noreferrer"
                           onClick={(event) => event.stopPropagation()}
-                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                          className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
                         >
                           Live App <ExternalLink className="size-3.5" />
                         </a>
                       )}
-                      {(project.behanceLink || project.caseStudyLink) && (
-                        <a
-                          href={project.behanceLink ?? project.caseStudyLink}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(event) => event.stopPropagation()}
-                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
-                        >
-                          View Case Study <ExternalLink className="size-3.5" />
-                        </a>
-                      )}
-                      {!project.figmaEmbedUrl && !project.liveLink && !project.behanceLink && !project.caseStudyLink && (
+                      {!project.figmaEmbedUrl && !project.behanceUrl && !project.liveLink && (
                         <button
                           type="button"
                           disabled
-                          className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white disabled:cursor-not-allowed"
+                          className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white disabled:cursor-not-allowed"
                         >
                           Case Study Coming Soon
                         </button>
