@@ -45,7 +45,7 @@ export const portfolioData: Project[] = [
     description: 'Augmented reality mobile application designed for real-time vehicle diagnostics and visual repair guidance.',
     tags: ['AR/Spatial UI', 'Mobile App', 'Figma'],
     image: '/projects/uiux/ar-mechanic.webp',
-    figmaEmbedUrl: 'https://embed.figma.com/proto/XVz13fJDnrpzWcpFxqjEOn/AR-Assignment?node-id=604-2411&scaling=contain&content-scaling=responsive&page-id=491%3A1086&embed-host=share',
+    figmaEmbedUrl: 'https://embed.figma.com/proto/XVz13fJDnrpzWcpFxqjEOn/AR-Assignment?node-id=604-2411&scaling=scale-down-width&content-scaling=fixed&page-id=491%3A1086&embed-host=share',
     featured: true,
   },
 
@@ -58,7 +58,7 @@ export const portfolioData: Project[] = [
     description: 'Modern medical brand identity system, typography hierarchy, and healthcare visual communication guidelines.',
     tags: ['Branding', 'Visual Identity', 'Design System'],
     image: '/projects/brand/vitalcare.webp',
-    figmaEmbedUrl: 'https://embed.figma.com/proto/hvrN9zVoVRwJTbiM4Mq0JG/VitalCare-Logo-Branding?node-id=2016-762&scaling=contain&content-scaling=responsive&page-id=0%3A1&embed-host=share',
+    figmaEmbedUrl: 'https://embed.figma.com/proto/hvrN9zVoVRwJTbiM4Mq0JG/VitalCare-Logo-Branding?node-id=2016-762&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&embed-host=share',
     featured: false,
   },
   {
@@ -69,7 +69,7 @@ export const portfolioData: Project[] = [
   description: 'Agricultural technology logo design, brand architecture, and marketing assets.',
   tags: ['Logo Design', 'AgTech', 'Brand Guidelines'],
   image: '/projects/brand/cropcura.webp',
-  figmaEmbedUrl: 'https://embed.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&scaling=contain&content-scaling=responsive&page-id=0%3A1&embed-host=share',
+  figmaEmbedUrl: 'https://embed.figma.com/proto/WGHKs2ECXI8OeDQNfQ3m9x/Cropcura?node-id=14-1459&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&embed-host=share',
   featured: false,
   },
   {
