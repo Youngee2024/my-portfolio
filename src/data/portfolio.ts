@@ -40,33 +40,33 @@ export const portfolioData: Project[] = [
     tags: ['Figma', 'Fintech', 'Design System'],
     image: '/projects/uiux/pulse.webp',
     figmaEmbedUrl: 'https://embed.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&scaling=scale-down-width&content-scaling=fixed&page-id=1309%3A8332&starting-point-node-id=1309%3A9068&embed-host=share',
-    summary: 'Pulse is a mobile fintech experience designed to make everyday banking feel clear, fast, and trustworthy—from account setup to transfers and financial oversight.',
-    problem: 'Digital banking products often expose users to dense information, unclear transaction states, and fragmented money-management flows. Pulse needed to reduce that cognitive load without sacrificing the confidence and detail people expect from a financial product.',
+    summary: "A cross-platform fintech solution designed to digitize and bring trust to personal and community savings models like Ajo/Esusu.",
+    overview: "Pulse is a modern fintech platform available on both mobile and web, designed to bring structure and trust to personal and group savings. It empowers users to save individually, contribute to circles, track expenses, and visualize their financial progress through a consistent, user-friendly experience.",
+    problem: "Saving money individually suffers from a lack of discipline and visibility. In group settings, traditional savings models like Ajo/Esusu are plagued by a lack of transparency, cash-handling anxiety, and administrative friction when collecting contributions.",
+    solution: "Pulse introduces rhythm and clarity to personal finance with a Goal Progress Visualizer. For groups, it replaces manual tracking with a Transparent Ledger and automates administrative hassles via Digital Payout Automation.",
+    targetAudience: [
+      "Primary: Individuals seeking automated financial discipline and goal tracking.",
+      "Secondary: Savings circle members and administrators looking for transparent, digitized community payouts."
+    ],
     research: [
-      'Mapped the most common mobile-banking tasks and the points where uncertainty can interrupt completion.',
-      'Reviewed established fintech products to identify familiar interaction patterns, trust signals, and accessibility gaps.',
-      'Compared user expectations across onboarding, balance monitoring, transfers, and transaction-history flows.',
+      "Confirmed the 'Discipline Gap': Users heavily lack automated systems and clear visual progress tracking.",
+      "Validated the 'Trust Gap': High anxiety around manual cash handling in group savings models.",
+      "Quantified 'Admin Burden': High demand for digitizing contribution reminders and payout schedules.",
+      "Validated Core Feature Set: Overwhelming user demand for a Transparent Ledger and Automated Digital Payouts."
     ],
     process: [
-      'Defined the product architecture and prioritized the core journeys around high-frequency banking tasks.',
-      'Created low-fidelity wireframes to test hierarchy, navigation, and progressive disclosure before visual styling.',
-      'Developed a reusable component system covering inputs, cards, transaction states, navigation, and feedback patterns.',
-      'Connected the high-fidelity screens into an interactive prototype and refined transitions between key states.',
+      "Mapped out user flows for individual savings goals vs. collaborative group savings circles.",
+      "Designed a data-driven dashboard emphasizing real-time progress visualizers and transparent ledgers.",
+      "Created cross-platform UI components in Figma to maintain visual consistency across mobile and desktop interfaces."
     ],
-    solution: 'The final experience combines a focused dashboard, clear transaction feedback, guided transfer flows, and a consistent visual system. Strong hierarchy and purposeful use of color help users understand balances, actions, and status at a glance.',
+    challenges: [
+      "Designing a flexible ledger system that handles both individual tracking and multi-member group payouts.",
+      "Reducing social friction and user anxiety around automated money collection."
+    ],
     impact: [
-      'Established a coherent end-to-end experience across the product’s primary banking journeys.',
-      'Reduced interface complexity by grouping actions and financial information around user intent.',
-      'Created a reusable design foundation that can support additional financial tools and account features.',
+      "Digitized traditional Ajo/Esusu models to eliminate manual payout tracking.",
+      "Improved savings discipline through visual progress cues and automated goal tracking."
     ],
-    metrics: [
-      { label: 'Product scope', value: 'End-to-end' },
-      { label: 'Primary platform', value: 'Mobile' },
-      { label: 'Prototype fidelity', value: 'High' },
-    ],
-    prototypeUrl: 'https://embed.figma.com/proto/cZ88NZMZWc6d3aZd5lq3tH/Pulse?node-id=1309-9068&scaling=scale-down-width&content-scaling=fixed&page-id=1309%3A8332&starting-point-node-id=1309%3A9068&embed-host=share',
-    timeline: '8-week product design sprint',
-    role: 'Product Designer & UI/UX Designer',
     featured: true,
   },
   {
