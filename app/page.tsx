@@ -1,21 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { SiBehance, SiGithub, SiLinkedin, SiX } from "react-icons/si";
 import {
   ArrowDown,
   ArrowUpRight,
+  Check,
   Code2,
   ExternalLink,
   Mail,
+  Loader2,
   MapPin,
   Maximize2,
   Menu,
   Palette,
   Phone,
   PenTool,
+  Send,
   X,
 } from "lucide-react";
 
@@ -23,6 +26,8 @@ import { personalInfo } from "@/data/personalInfo";
 import { portfolioData, type Project } from "@/data/portfolio";
 
 type Filter = "all" | Project["category"];
+type FormStatus = "idle" | "submitting" | "success" | "error";
+type FormErrors = Partial<Record<"name" | "email" | "message" | "form", string>>;
 
 const heroContainerVariants: Variants = {
   hidden: {},
@@ -144,6 +149,11 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState<Filter>("all");
   const [selectedFigmaUrl, setSelectedFigmaUrl] = useState<string | null>(null);
   const [selectedProjectTitle, setSelectedProjectTitle] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [validationErrors, setValidationErrors] = useState<FormErrors>({});
   const visibleProjects = portfolioData.filter(
     (project) => activeFilter === "all" || project.category === activeFilter,
   );
@@ -179,6 +189,48 @@ export default function Home() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [selectedFigmaUrl]);
+
+  useEffect(() => {
+    if (status !== "success") return;
+
+    const resetTimer = window.setTimeout(() => setStatus("idle"), 4000);
+    return () => window.clearTimeout(resetTimer);
+  }, [status]);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const errors: FormErrors = {};
+    if (!name.trim()) errors.name = "Please enter your name.";
+    if (!email.trim()) {
+      errors.email = "Please enter your email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!message.trim()) errors.message = "Please tell me a little about your project.";
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      setStatus("error");
+      return;
+    }
+
+    setValidationErrors({});
+    setStatus("submitting");
+
+    try {
+      await new Promise<void>((resolve) => window.setTimeout(resolve, 1500));
+      setName("");
+      setEmail("");
+      setMessage("");
+      setStatus("success");
+    } catch {
+      setValidationErrors({
+        form: "Your message could not be sent. Please try again or email me directly.",
+      });
+      setStatus("error");
+    }
+  };
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100 selection:bg-violet-400 selection:text-zinc-950">
@@ -559,16 +611,116 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="relative overflow-hidden rounded-[2rem] border border-zinc-800 bg-zinc-900/60 px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
             <div className="absolute right-0 bottom-0 size-72 translate-x-1/3 translate-y-1/3 rounded-full bg-violet-600/20 blur-3xl" />
-            <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Have a project in mind?</p>
-            <h2 className="mt-6 max-w-4xl text-4xl leading-tight font-semibold tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl">
-              Let&apos;s build something exceptional together.
-            </h2>
-            <a href={`mailto:${personalInfo.email}`} className="group mt-10 inline-flex items-center gap-3 border-b border-zinc-600 pb-2 text-base font-medium text-zinc-200 transition hover:border-violet-300 hover:text-violet-300 sm:text-xl">
-              {personalInfo.email}<ArrowUpRight className="size-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-            <div className="mt-16 flex flex-col gap-5 border-t border-zinc-800 pt-8 text-sm text-zinc-400 sm:flex-row sm:gap-10">
-              <a href={`tel:${personalInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 transition hover:text-white"><Phone className="size-4" />{personalInfo.phone}</a>
-              <span className="flex items-center gap-2"><MapPin className="size-4" />{personalInfo.location}</span>
+            <div className="relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+              <div className="flex flex-col">
+                <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Have a project in mind?</p>
+                <h2 className="mt-6 max-w-xl text-4xl leading-tight font-semibold tracking-[-0.045em] text-white sm:text-5xl">
+                  Let&apos;s build something exceptional together.
+                </h2>
+                <a href={`mailto:${personalInfo.email}`} className="group mt-10 inline-flex w-fit items-center gap-3 border-b border-zinc-600 pb-2 text-base font-medium text-zinc-200 transition hover:border-violet-300 hover:text-violet-300 sm:text-lg">
+                  {personalInfo.email}<ArrowUpRight className="size-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+                <div className="mt-12 flex flex-col gap-5 border-t border-zinc-800 pt-7 text-sm text-zinc-400 sm:flex-row sm:gap-8 lg:mt-auto">
+                  <a href={`tel:${personalInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 transition hover:text-white"><Phone className="size-4" />{personalInfo.phone}</a>
+                  <span className="flex items-center gap-2"><MapPin className="size-4" />{personalInfo.location}</span>
+                </div>
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                noValidate
+                className="rounded-2xl border border-zinc-800 bg-zinc-950/65 p-5 shadow-2xl shadow-black/20 sm:p-7"
+              >
+                {status === "success" && (
+                  <div className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300" role="status">
+                    <Check className="size-4 shrink-0" />
+                    Thanks—your message was sent successfully.
+                  </div>
+                )}
+                {status === "error" && validationErrors.form && (
+                  <div className="mb-6 rounded-xl border border-red-500/25 bg-red-500/10 px-4 py-3 text-sm text-red-300" role="alert">
+                    {validationErrors.form}
+                  </div>
+                )}
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="contact-name" className="mb-2 block text-xs font-medium text-zinc-300">Name</label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      value={name}
+                      onChange={(event) => {
+                        setName(event.target.value);
+                        setValidationErrors((current) => ({ ...current, name: undefined }));
+                      }}
+                      disabled={status === "submitting"}
+                      aria-invalid={Boolean(validationErrors.name)}
+                      aria-describedby={validationErrors.name ? "contact-name-error" : undefined}
+                      className="h-12 w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-600 focus:ring-2 focus:ring-violet-400/20 disabled:cursor-not-allowed disabled:opacity-60"
+                      placeholder="Your name"
+                    />
+                    {validationErrors.name && <p id="contact-name-error" className="mt-2 text-xs text-red-300">{validationErrors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-email" className="mb-2 block text-xs font-medium text-zinc-300">Email</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(event) => {
+                        setEmail(event.target.value);
+                        setValidationErrors((current) => ({ ...current, email: undefined }));
+                      }}
+                      disabled={status === "submitting"}
+                      aria-invalid={Boolean(validationErrors.email)}
+                      aria-describedby={validationErrors.email ? "contact-email-error" : undefined}
+                      className="h-12 w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-600 focus:ring-2 focus:ring-violet-400/20 disabled:cursor-not-allowed disabled:opacity-60"
+                      placeholder="you@example.com"
+                    />
+                    {validationErrors.email && <p id="contact-email-error" className="mt-2 text-xs text-red-300">{validationErrors.email}</p>}
+                  </div>
+                </div>
+
+                <div className="mt-5">
+                  <label htmlFor="contact-message" className="mb-2 block text-xs font-medium text-zinc-300">Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={6}
+                    value={message}
+                    onChange={(event) => {
+                      setMessage(event.target.value);
+                      setValidationErrors((current) => ({ ...current, message: undefined }));
+                    }}
+                    disabled={status === "submitting"}
+                    aria-invalid={Boolean(validationErrors.message)}
+                    aria-describedby={validationErrors.message ? "contact-message-error" : undefined}
+                    className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm leading-6 text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-600 focus:ring-2 focus:ring-violet-400/20 disabled:cursor-not-allowed disabled:opacity-60"
+                    placeholder="Tell me about your project, timeline, and goals..."
+                  />
+                  {validationErrors.message && <p id="contact-message-error" className="mt-2 text-xs text-red-300">{validationErrors.message}</p>}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-zinc-100 px-6 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300 focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {status === "submitting" ? (
+                    <><Loader2 className="size-4 animate-spin" />Sending...</>
+                  ) : status === "success" ? (
+                    <><Check className="size-4" />Message Sent!</>
+                  ) : (
+                    <><Send className="size-4" />Send Message</>
+                  )}
+                </button>
+              </form>
             </div>
           </div>
           <div className="flex flex-col gap-4 py-8 text-xs text-zinc-600 sm:flex-row sm:items-center sm:justify-between">
