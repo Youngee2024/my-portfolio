@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { SiBehance, SiGithub, SiLinkedin, SiX } from "react-icons/si";
 import {
@@ -447,6 +448,14 @@ export default function Home() {
                       ))}
                     </div>
                     <div className="mt-6 flex min-h-9 flex-wrap items-center gap-5 border-t border-zinc-800">
+                      <Link
+                        href={`/work/${project.slug}`}
+                        onClick={(event) => event.stopPropagation()}
+                        onKeyDown={(event) => event.stopPropagation()}
+                        className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
+                      >
+                        View Case Study <ArrowUpRight className="size-3.5" />
+                      </Link>
                       {project.figmaEmbedUrl && (
                         <button
                           type="button"
@@ -459,17 +468,6 @@ export default function Home() {
                           View Prototype <Maximize2 className="size-3.5" />
                         </button>
                       )}
-                      {project.behanceUrl && !project.figmaEmbedUrl && (
-                        <a
-                          href={project.behanceUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(event) => event.stopPropagation()}
-                          className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white"
-                        >
-                          View Case Study <ExternalLink className="size-3.5" />
-                        </a>
-                      )}
                       {project.liveLink && !project.figmaEmbedUrl && (
                         <a
                           href={project.liveLink}
@@ -480,15 +478,6 @@ export default function Home() {
                         >
                           Live App <ExternalLink className="size-3.5" />
                         </a>
-                      )}
-                      {!project.figmaEmbedUrl && !project.behanceUrl && !project.liveLink && (
-                        <button
-                          type="button"
-                          disabled
-                          className="flex items-center gap-1.5 pt-3 text-xs font-medium text-zinc-400 transition-colors group-hover:text-white disabled:cursor-not-allowed"
-                        >
-                          Case Study Coming Soon
-                        </button>
                       )}
                     </div>
                   </div>
