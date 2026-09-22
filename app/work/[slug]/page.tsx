@@ -11,7 +11,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-import { portfolioData, type Project } from "@/data/portfolio";
+import { hasCompleteCaseStudy, portfolioData, type Project } from "@/data/portfolio";
 
 type CaseStudyPageProps = {
   params: Promise<{ slug: string }>;
@@ -23,13 +23,15 @@ const defaultRoles: Record<Project["category"], string> = {
   frontend: "Frontend Developer",
 };
 
+const caseStudyProjects = portfolioData.filter(hasCompleteCaseStudy);
+
 export function generateStaticParams() {
-  return portfolioData.map((project) => ({ slug: project.slug }));
+  return caseStudyProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = portfolioData.find((item) => item.slug === slug);
+  const project = caseStudyProjects.find((item) => item.slug === slug);
 
   if (!project) return { title: "Case Study Not Found" };
 
@@ -46,22 +48,22 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
-  const projectIndex = portfolioData.findIndex((item) => item.slug === slug);
+  const projectIndex = caseStudyProjects.findIndex((item) => item.slug === slug);
 
   if (projectIndex === -1) notFound();
 
-  const project = portfolioData[projectIndex];
-  const previousProject = portfolioData[(projectIndex - 1 + portfolioData.length) % portfolioData.length];
-  const nextProject = portfolioData[(projectIndex + 1) % portfolioData.length];
+  const project = caseStudyProjects[projectIndex];
+  const previousProject = caseStudyProjects[(projectIndex - 1 + caseStudyProjects.length) % caseStudyProjects.length];
+  const nextProject = caseStudyProjects[(projectIndex + 1) % caseStudyProjects.length];
   const prototypeUrl = project.prototypeUrl ?? project.figmaEmbedUrl;
 
   return (
-    <main className="min-h-screen overflow-hidden bg-zinc-950 text-zinc-100">
+    <main className="relative min-h-screen overflow-hidden bg-zinc-950 text-zinc-100">
       <div className="pointer-events-none absolute top-0 left-1/2 h-[34rem] w-[60rem] -translate-x-1/2 rounded-full bg-violet-600/10 blur-3xl" />
 
       <header className="relative border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-md">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-          <Link href="/" className="flex items-center gap-3 text-sm font-semibold text-zinc-100">
+          <Link href="/" className="flex min-h-11 items-center gap-3 text-sm font-semibold text-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400">
             <span className="grid size-9 place-items-center rounded-full border border-violet-400/35 bg-violet-400/10 text-xs text-violet-300">IO</span>
             <span className="hidden sm:inline">Ibraheem Olawale</span>
           </Link>
@@ -97,14 +99,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div className="mt-14 grid gap-4 border-t border-zinc-800 pt-8 sm:grid-cols-3">
             <div className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
               <CalendarDays className="mt-0.5 size-4 text-violet-300" />
-              <div><p className="text-xs text-zinc-500">Timeline</p><p className="mt-1 text-sm text-zinc-200">{project.timeline ?? "Independent project"}</p></div>
+              <div><p className="text-xs text-zinc-400">Timeline</p><p className="mt-1 text-sm text-zinc-200">{project.timeline ?? "Independent project"}</p></div>
             </div>
             <div className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
               <UserRound className="mt-0.5 size-4 text-violet-300" />
-              <div><p className="text-xs text-zinc-500">My role</p><p className="mt-1 text-sm text-zinc-200">{project.role ?? defaultRoles[project.category]}</p></div>
+              <div><p className="text-xs text-zinc-400">My role</p><p className="mt-1 text-sm text-zinc-200">{project.role ?? defaultRoles[project.category]}</p></div>
             </div>
             <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
-              <p className="text-xs text-zinc-500">Discipline</p><p className="mt-1 text-sm text-zinc-200">{project.categoryLabel}</p>
+              <p className="text-xs text-zinc-400">Discipline</p><p className="mt-1 text-sm text-zinc-200">{project.categoryLabel}</p>
             </div>
           </div>
         </section>
@@ -134,11 +136,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div className="grid gap-5">
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
               <h3 className="text-sm font-semibold text-zinc-100">Overview</h3>
-              <p className="mt-4 leading-7 text-zinc-400">{project.summary ?? project.description}</p>
+              <p className="mt-4 leading-7 text-zinc-400">{project.summary}</p>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
               <h3 className="text-sm font-semibold text-zinc-100">Problem statement</h3>
-              <p className="mt-4 leading-7 text-zinc-400">{project.problem ?? "A detailed problem statement for this project is currently being prepared."}</p>
+              <p className="mt-4 leading-7 text-zinc-400">{project.problem}</p>
             </div>
           </div>
         </section>
@@ -151,7 +153,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
                 <h3 className="text-lg font-semibold text-zinc-100">User research</h3>
                 <ul className="mt-6 space-y-5">
-                  {(project.research ?? ["Research documentation for this project is coming soon."]).map((item) => (
+                  {project.research.map((item) => (
                     <li key={item} className="flex gap-3 text-sm leading-6 text-zinc-400"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-violet-400" />{item}</li>
                   ))}
                 </ul>
@@ -159,7 +161,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
                 <h3 className="text-lg font-semibold text-zinc-100">Process</h3>
                 <ol className="mt-6 space-y-5">
-                  {(project.process ?? ["Process documentation for this project is coming soon."]).map((item, index) => (
+                  {project.process.map((item, index) => (
                     <li key={item} className="flex gap-4 text-sm leading-6 text-zinc-400"><span className="font-mono text-xs text-violet-300">{String(index + 1).padStart(2, "0")}</span>{item}</li>
                   ))}
                 </ol>
@@ -174,17 +176,50 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">03 / Experience</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-5xl">Interactive Prototype</h2>
             </div>
-            {prototypeUrl && <a href={prototypeUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white">Open in new tab <ExternalLink className="size-4" /></a>}
+            {prototypeUrl && <a href={prototypeUrl} target="_blank" rel="noreferrer" className="hidden min-h-11 items-center gap-2 text-sm text-zinc-400 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 md:flex">Open in new tab <ExternalLink className="size-4" /></a>}
           </div>
-          <div className="mt-10 aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-black shadow-2xl">
-            {prototypeUrl ? (
-              <iframe src={prototypeUrl} title={`${project.title} interactive prototype`} className="size-full border-0" allowFullScreen />
-            ) : project.image ? (
+          {prototypeUrl ? (
+            <>
+              <div className="mt-8 md:hidden">
+                <div className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
+                  {project.image && (
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} prototype preview`}
+                      width={800}
+                      height={450}
+                      quality={85}
+                      sizes="100vw"
+                      className="size-full object-cover opacity-65"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                  <p className="absolute right-5 bottom-5 left-5 text-sm leading-6 text-zinc-200">
+                    Open the full prototype for a more usable mobile experience.
+                  </p>
+                </div>
+                <a
+                  href={prototypeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
+                >
+                  Open interactive prototype <ExternalLink className="size-4" />
+                </a>
+              </div>
+              <div className="mt-10 hidden aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-black shadow-2xl md:block">
+                <iframe src={prototypeUrl} title={`${project.title} interactive prototype`} className="size-full border-0" allowFullScreen />
+              </div>
+            </>
+          ) : (
+            <div className="mt-10 aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-black shadow-2xl">
+              {project.image ? (
               <Image src={project.image} alt={`${project.title} high-resolution visual`} width={1600} height={900} quality={90} sizes="(max-width: 1280px) 100vw, 1280px" className="size-full object-cover" />
-            ) : (
-              <div className="grid size-full place-items-center text-sm text-zinc-500">Prototype preview coming soon.</div>
-            )}
-          </div>
+              ) : (
+                <div className="grid size-full place-items-center text-sm text-zinc-400">Prototype preview unavailable.</div>
+              )}
+            </div>
+          )}
         </section>
 
         <section className="border-y border-zinc-900 bg-zinc-900/20 py-24 lg:py-32">
@@ -196,10 +231,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <div>
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
                 <h3 className="text-sm font-semibold text-zinc-100">The solution</h3>
-                <p className="mt-4 leading-7 text-zinc-400">{project.solution ?? project.description}</p>
+                <p className="mt-4 leading-7 text-zinc-400">{project.solution}</p>
               </div>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                {(project.impact ?? ["A full impact review for this project is coming soon."]).map((item) => (
+                {project.impact.map((item) => (
                   <div key={item} className="flex gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 text-sm leading-6 text-zinc-400"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-400" />{item}</div>
                 ))}
               </div>
@@ -218,11 +253,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         <nav className="mx-auto grid max-w-7xl gap-4 px-5 py-20 sm:grid-cols-2 sm:px-8 lg:px-12" aria-label="Case study navigation">
           <Link href={`/work/${previousProject.slug}`} className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition hover:-translate-y-1 hover:border-zinc-600">
-            <span className="flex items-center gap-2 text-xs text-zinc-500"><ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" />Previous case study</span>
+            <span className="flex items-center gap-2 text-xs text-zinc-400"><ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" />Previous case study</span>
             <span className="mt-3 block text-lg font-semibold text-zinc-100">{previousProject.title}</span>
           </Link>
           <Link href={`/work/${nextProject.slug}`} className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 text-right transition hover:-translate-y-1 hover:border-zinc-600">
-            <span className="flex items-center justify-end gap-2 text-xs text-zinc-500">Next case study<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" /></span>
+            <span className="flex items-center justify-end gap-2 text-xs text-zinc-400">Next case study<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" /></span>
             <span className="mt-3 block text-lg font-semibold text-zinc-100">{nextProject.title}</span>
           </Link>
         </nav>

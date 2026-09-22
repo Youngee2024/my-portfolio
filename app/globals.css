@@ -37,6 +37,11 @@ button {
   cursor: pointer;
 }
 
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 3px;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;

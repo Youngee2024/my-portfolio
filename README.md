@@ -2,6 +2,15 @@
 
 An interactive, high-performance portfolio featuring UI/UX case studies, visual brand identity systems, and production React/Next.js prototypes. Built with a focus on dark-mode aesthetics, responsive spatial hierarchy, and fluid interactive feedback.
 
+## Contact form setup
+
+The contact form submits through Web3Forms. Create an access key at
+[web3forms.com](https://web3forms.com), copy `.env.example` to `.env.local`, and
+set `WEB3FORMS_ACCESS_KEY`. Add the same environment variable to the Vercel
+project before deploying. When the key is missing or delivery fails, the form
+keeps the visitor's message and shows the direct email fallback instead of a
+false success state.
+
 🌐 **Live Demo:** [my-portfolio-five-theta-39.vercel.app](https://my-portfolio-five-theta-39.vercel.app)
 
 ---

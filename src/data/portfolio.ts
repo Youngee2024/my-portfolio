@@ -28,6 +28,20 @@ export interface Project {
   featured: boolean;
 }
 
+type CompleteCaseStudyProject = Project &
+  Required<Pick<Project, 'summary' | 'problem' | 'research' | 'process' | 'solution' | 'impact'>>;
+
+export function hasCompleteCaseStudy(project: Project): project is CompleteCaseStudyProject {
+  return Boolean(
+    project.summary &&
+      project.problem &&
+      project.research?.length &&
+      project.process?.length &&
+      project.solution &&
+      project.impact?.length,
+  );
+}
+
 export const portfolioData: Project[] = [
   // --- 60% UI/UX & Product Design ---
   {
@@ -49,10 +63,10 @@ export const portfolioData: Project[] = [
       "Secondary: Savings circle members and administrators looking for transparent, digitized community payouts."
     ],
     research: [
-      "Confirmed the 'Discipline Gap': Users heavily lack automated systems and clear visual progress tracking.",
-      "Validated the 'Trust Gap': High anxiety around manual cash handling in group savings models.",
-      "Quantified 'Admin Burden': High demand for digitizing contribution reminders and payout schedules.",
-      "Validated Core Feature Set: Overwhelming user demand for a Transparent Ledger and Automated Digital Payouts."
+      "Explored how limited automation and unclear progress tracking can make personal saving difficult to sustain.",
+      "Mapped trust concerns around manual cash handling and record keeping in group savings models.",
+      "Reviewed the administrative work involved in contribution reminders, schedules, and group payouts.",
+      "Used those findings to prioritize transparent ledgers, progress visibility, reminders, and digital payouts."
     ],
     process: [
       "Mapped out user flows for individual savings goals vs. collaborative group savings circles.",
@@ -65,7 +79,7 @@ export const portfolioData: Project[] = [
     ],
     impact: [
       "Digitized traditional Ajo/Esusu models to eliminate manual payout tracking.",
-      "Improved savings discipline through visual progress cues and automated goal tracking."
+      "Made savings goals and contribution progress easier to understand through clear visual feedback."
     ],
     featured: true,
   },
@@ -99,10 +113,10 @@ export const portfolioData: Project[] = [
     "Secondary: DIY automotive enthusiasts, students in automotive training programs, and roadside assistance teams needing quick mobile diagnostics."
     ],
     research: [
-    "72% of drivers feel completely 'lost' when opening their car hood.",
-    "Users strongly prefer 'show-me-where' visual spatial guidance over text-heavy guides.",
-    "Major user anxiety stems from touching the wrong part or causing accidental damage.",
-    "AR overlay features are perceived as high-value, provided detection accuracy and trust are maintained."
+    "Explored where drivers with limited mechanical experience feel uncertain during basic maintenance tasks.",
+    "Compared visual, spatial guidance with text-heavy repair instructions to identify clearer interaction patterns.",
+    "Mapped safety concerns around touching the wrong component or causing accidental damage.",
+    "Prioritized transparent detection confidence and fallback guidance as core trust requirements for the AR experience."
     ],
     process: [
     "Deconstructed engine bays to identify high-frequency basic maintenance touchpoints (fluids, battery, filters).",
@@ -115,9 +129,9 @@ export const portfolioData: Project[] = [
     "Designing confidence thresholds to communicate when AR detection isn't 100% certain."
     ],
     impact: [
-    "Streamlined diagnostic time for basic fluid and battery checks.",
-    "Increased user confidence ratings for self-service car maintenance.",
-    "Reduced repair error anxiety through explicit visual safety checkpoints."
+    "Created a shorter guided path for common fluid and battery checks.",
+    "Designed the experience to make basic self-service maintenance feel more approachable.",
+    "Addressed repair-error anxiety with explicit visual safety checkpoints."
     ],
     featured: true,
   },
