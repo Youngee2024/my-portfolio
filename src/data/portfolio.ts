@@ -32,6 +32,20 @@ export interface Project {
   responsibilities?: string[];
   outcomeNote?: string;
   technicalHighlights?: string[];
+  caseStudyVisuals?: {
+    artefactLabel: string;
+    artefactTitle: string;
+    artefactDescription: string;
+    annotations: { label: string; detail: string }[];
+    comparison: {
+      beforeLabel: string;
+      before: string;
+      afterLabel: string;
+      after: string;
+      rationale: string;
+    };
+    palette?: { name: string; value: string }[];
+  };
   featured: boolean;
 }
 
@@ -119,6 +133,23 @@ export const portfolioData: Project[] = [
       "Made savings goals and contribution progress easier to understand through clear visual feedback."
     ],
     outcomeNote: "Pulse is a self-directed concept case study. The outcomes describe the design coverage and intended user benefit; they are not presented as production analytics or post-launch research results.",
+    caseStudyVisuals: {
+      artefactLabel: "Core interaction",
+      artefactTitle: "Savings progress that stays understandable",
+      artefactDescription: "The goal card keeps the amount, progress, next action, and contribution history in one visible hierarchy so users do not need to reconstruct their financial position.",
+      annotations: [
+        { label: "Progress first", detail: "Amount saved and percentage complete share the strongest visual position." },
+        { label: "Trust cue", detail: "The ledger makes individual and group contributions traceable." },
+        { label: "Next action", detail: "A single contribution action keeps the path forward unambiguous." },
+      ],
+      comparison: {
+        beforeLabel: "Manual saving circle",
+        before: "Scattered reminders, private records, and uncertainty about who has paid.",
+        afterLabel: "Pulse shared ledger",
+        after: "One visible schedule, contribution history, and payout state for every member.",
+        rationale: "The design response prioritizes shared visibility because trust depends on every member seeing the same record.",
+      },
+    },
     timeline: "Self-directed concept case study",
     role: "Product Designer",
     projectType: "Portfolio concept",
@@ -187,6 +218,23 @@ export const portfolioData: Project[] = [
     "Addressed repair-error anxiety with explicit visual safety checkpoints."
     ],
     outcomeNote: "AR Mechanic is a self-directed product concept. The outcome statements describe design intent and prototype coverage rather than measured repair-time or confidence improvements in a released product.",
+    caseStudyVisuals: {
+      artefactLabel: "Spatial interaction",
+      artefactTitle: "Guidance without hiding the engine",
+      artefactDescription: "The interface uses restrained markers, confidence feedback, and staged instructions so digital guidance supports the physical task instead of competing with it.",
+      annotations: [
+        { label: "Detection state", detail: "Confidence is surfaced before the user acts on a diagnosis." },
+        { label: "Spatial marker", detail: "Warnings stay anchored to the relevant physical component." },
+        { label: "Safety gate", detail: "Repair steps begin only after an explicit checkpoint." },
+      ],
+      comparison: {
+        beforeLabel: "Conventional instructions",
+        before: "Technical terminology and static diagrams force drivers to identify components alone.",
+        afterLabel: "Guided AR diagnosis",
+        after: "Contextual markers connect the instruction directly to the component in view.",
+        rationale: "The chosen direction reduces interpretation work while preserving clear uncertainty and safety states.",
+      },
+    },
     timeline: "Self-directed concept case study",
     role: "Product Designer",
     projectType: "Portfolio concept",
@@ -253,6 +301,29 @@ export const portfolioData: Project[] = [
     status: 'Identity system completed',
     team: 'Independent',
     outcomeNote: 'The evidence reflects the completed identity system and its application coverage. No patient-satisfaction, recognition, or commercial-performance claims are made because the work is presented as a design engagement rather than a measured rollout.',
+    caseStudyVisuals: {
+      artefactLabel: 'Identity system',
+      artefactTitle: 'Clinical clarity with a human signal',
+      artefactDescription: 'The identity combines a structured healthcare symbol with softer geometry and an accessible blue–green palette, allowing authority and reassurance to coexist.',
+      annotations: [
+        { label: 'Distinctive silhouette', detail: 'The V-shaped structure remains recognizable before supporting typography is introduced.' },
+        { label: 'Care signal', detail: 'The medical cross communicates the category without carrying the identity alone.' },
+        { label: 'Flexible contrast', detail: 'Blue and green roles can adapt across formal and patient-facing applications.' },
+      ],
+      comparison: {
+        beforeLabel: 'Logo as deliverable',
+        before: 'A single mark with no guidance for hierarchy, color behavior, or real-world application.',
+        afterLabel: 'Identity as system',
+        after: 'A repeatable set of mark, color, typography, spacing, and application rules.',
+        rationale: 'The system approach makes new touchpoints easier to produce without weakening recognition or tone.',
+      },
+      palette: [
+        { name: 'Clinical blue', value: '#237FBD' },
+        { name: 'Care green', value: '#4AAA43' },
+        { name: 'Vital lime', value: '#82C84B' },
+        { name: 'Clear white', value: '#F7FAFC' },
+      ],
+    },
     featured: true,
   },
   {
