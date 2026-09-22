@@ -5,10 +5,14 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
+  BriefcaseBusiness,
   CalendarDays,
   CheckCircle2,
   ExternalLink,
+  Info,
+  Layers3,
   UserRound,
+  UsersRound,
 } from "lucide-react";
 
 import { hasCompleteCaseStudy, portfolioData, type Project } from "@/data/portfolio";
@@ -96,7 +100,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-4 border-t border-zinc-800 pt-8 sm:grid-cols-3">
+          <div className="mt-14 grid gap-4 border-t border-zinc-800 pt-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
               <CalendarDays className="mt-0.5 size-4 text-violet-300" />
               <div><p className="text-xs text-zinc-400">Timeline</p><p className="mt-1 text-sm text-zinc-200">{project.timeline ?? "Independent project"}</p></div>
@@ -105,8 +109,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               <UserRound className="mt-0.5 size-4 text-violet-300" />
               <div><p className="text-xs text-zinc-400">My role</p><p className="mt-1 text-sm text-zinc-200">{project.role ?? defaultRoles[project.category]}</p></div>
             </div>
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
-              <p className="text-xs text-zinc-400">Discipline</p><p className="mt-1 text-sm text-zinc-200">{project.categoryLabel}</p>
+            <div className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+              <BriefcaseBusiness className="mt-0.5 size-4 text-violet-300" />
+              <div><p className="text-xs text-zinc-400">Project type</p><p className="mt-1 text-sm text-zinc-200">{project.projectType ?? project.categoryLabel}</p></div>
+            </div>
+            <div className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+              <UsersRound className="mt-0.5 size-4 text-violet-300" />
+              <div><p className="text-xs text-zinc-400">Team / status</p><p className="mt-1 text-sm text-zinc-200">{project.team ?? "Independent"} · {project.status ?? "Case study"}</p></div>
             </div>
           </div>
         </section>
@@ -136,7 +145,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div className="grid gap-5">
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
               <h3 className="text-sm font-semibold text-zinc-100">Overview</h3>
-              <p className="mt-4 leading-7 text-zinc-400">{project.summary}</p>
+              <p className="mt-4 leading-7 text-zinc-400">{project.overview}</p>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
               <h3 className="text-sm font-semibold text-zinc-100">Problem statement</h3>
@@ -148,7 +157,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <section className="border-y border-zinc-900 bg-zinc-900/20 py-24 lg:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
             <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">02 / Discovery &amp; Delivery</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-5xl">Research &amp; Process Highlights</h2>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-5xl">Research &amp; Decision Process</h2>
+            <div className="mt-12 rounded-2xl border border-violet-400/20 bg-violet-400/8 p-6 sm:p-8">
+              <div className="flex items-center gap-3">
+                <Layers3 className="size-5 text-violet-300" />
+                <h3 className="text-lg font-semibold text-zinc-100">Methodology</h3>
+              </div>
+              <ul className="mt-6 grid gap-4 md:grid-cols-3">
+                {project.methodology.map((item) => (
+                  <li key={item} className="rounded-xl border border-white/8 bg-zinc-950/35 p-4 text-sm leading-6 text-zinc-300">{item}</li>
+                ))}
+              </ul>
+            </div>
             <div className="mt-12 grid gap-6 lg:grid-cols-2">
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
                 <h3 className="text-lg font-semibold text-zinc-100">User research</h3>
@@ -165,6 +185,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     <li key={item} className="flex gap-4 text-sm leading-6 text-zinc-400"><span className="font-mono text-xs text-violet-300">{String(index + 1).padStart(2, "0")}</span>{item}</li>
                   ))}
                 </ol>
+              </div>
+            </div>
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
+                <h3 className="text-lg font-semibold text-zinc-100">My responsibilities</h3>
+                <ul className="mt-6 space-y-5">
+                  {project.responsibilities.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-6 text-zinc-400"><CheckCircle2 className="mt-1 size-4 shrink-0 text-violet-300" />{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
+                <h3 className="text-lg font-semibold text-zinc-100">Constraints &amp; challenges</h3>
+                <ul className="mt-6 space-y-5">
+                  {project.challenges.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-6 text-zinc-400"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-amber-300" />{item}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -226,7 +264,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:px-12">
             <div>
               <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">04 / Outcome</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">Results, Impact &amp; Metrics</h2>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">Outcome &amp; Evidence</h2>
             </div>
             <div>
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 sm:p-8">
@@ -238,13 +276,23 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   <div key={item} className="flex gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 text-sm leading-6 text-zinc-400"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-400" />{item}</div>
                 ))}
               </div>
+              <div className="mt-6 flex gap-3 rounded-xl border border-sky-400/20 bg-sky-400/8 p-5 text-sm leading-6 text-zinc-300">
+                <Info className="mt-0.5 size-4 shrink-0 text-sky-300" />
+                <div>
+                  <p className="font-medium text-zinc-100">Evidence boundary</p>
+                  <p className="mt-1 text-zinc-400">{project.outcomeNote}</p>
+                </div>
+              </div>
               {project.metrics && project.metrics.length > 0 && (
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                  {project.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-xl border border-violet-400/20 bg-violet-400/8 p-5">
-                      <p className="text-xl font-semibold text-white">{metric.value}</p><p className="mt-1 text-xs text-zinc-400">{metric.label}</p>
-                    </div>
-                  ))}
+                <div className="mt-6">
+                  <p className="mb-3 text-xs font-medium tracking-[0.16em] text-zinc-400 uppercase">Deliverable snapshot</p>
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {project.metrics.map((metric) => (
+                      <div key={metric.label} className="rounded-xl border border-violet-400/20 bg-violet-400/8 p-5">
+                        <p className="text-xl font-semibold text-white">{metric.value}</p><p className="mt-1 text-xs text-zinc-400">{metric.label}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

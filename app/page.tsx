@@ -11,6 +11,7 @@ import {
   Check,
   Code2,
   ExternalLink,
+  FileText,
   Mail,
   Loader2,
   MapPin,
@@ -55,6 +56,22 @@ const filters: { label: string; value: Filter }[] = [
   { label: "Brand & Visual Identity", value: "brand" },
   { label: "Frontend & Technical Code", value: "frontend" },
 ];
+
+const projectOrder = [
+  "pulse",
+  "ar-mechanic",
+  "vitalcare",
+  "fashion-xpress",
+  "ai-interviewer",
+  "maya-insurance",
+  "voya-ui",
+  "cropcura",
+  "sara-handcraft",
+];
+
+const orderedPortfolioData = [...portfolioData].sort(
+  (first, second) => projectOrder.indexOf(first.id) - projectOrder.indexOf(second.id),
+);
 
 const pillars = [
   {
@@ -166,7 +183,7 @@ export default function Home() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
   const formErrorRef = useRef<HTMLDivElement>(null);
-  const visibleProjects = portfolioData.filter(
+  const visibleProjects = orderedPortfolioData.filter(
     (project) => activeFilter === "all" || project.category === activeFilter,
   );
 
@@ -344,6 +361,7 @@ export default function Home() {
             <a className="flex min-h-11 items-center transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-400" href="#work">Work</a>
             <a className="flex min-h-11 items-center transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-400" href="#capabilities">Capabilities</a>
             <a className="flex min-h-11 items-center transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-400" href="#about">About</a>
+            <Link className="flex min-h-11 items-center transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-400" href="/resume">Résumé</Link>
             <a className="flex min-h-11 items-center transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-400" href="#contact">Contact</a>
           </nav>
 
@@ -378,6 +396,7 @@ export default function Home() {
                 ["Work", "#work"],
                 ["Capabilities", "#capabilities"],
                 ["About", "#about"],
+                ["Résumé", "/resume"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (
                 <a
@@ -555,7 +574,7 @@ export default function Home() {
                       <span className="rounded-full border border-zinc-700 bg-zinc-950/70 px-3 py-1.5 text-[10px] font-medium tracking-wide text-zinc-400 uppercase">
                         {project.categoryLabel}
                       </span>
-                      <span className="font-mono text-xs text-zinc-600">0{portfolioData.indexOf(project) + 1}</span>
+                      <span className="font-mono text-xs text-zinc-500">0{orderedPortfolioData.indexOf(project) + 1}</span>
                     </div>
                     <h3 className="text-xl font-semibold tracking-tight text-white">{project.title}</h3>
                     <p className="mt-3 flex-1 text-sm leading-6 text-zinc-400">{project.description}</p>
@@ -590,6 +609,17 @@ export default function Home() {
                           className="flex min-h-11 items-center gap-1.5 pt-3 text-xs font-medium text-zinc-300 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
                         >
                           Live App <ExternalLink className="size-3.5" />
+                        </a>
+                      )}
+                      {project.githubLink && (
+                        <a
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex min-h-11 items-center gap-1.5 pt-3 text-xs font-medium text-zinc-300 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
+                          aria-label={`View ${project.title} source code on GitHub`}
+                        >
+                          Source <SiGithub className="size-3.5" />
                         </a>
                       )}
                     </div>
@@ -671,22 +701,65 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="group mt-auto inline-flex h-11 items-center justify-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300"
-                >
-                  Get in Touch
-                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+                <div className="mt-auto grid gap-3">
+                  <Link
+                    href="/resume"
+                    className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white"
+                  >
+                    View Résumé <FileText className="size-4" />
+                  </Link>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300"
+                  >
+                    Get in Touch
+                    <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </div>
               </aside>
             </div>
           </div>
         </section>
 
-        <section id="capabilities" className="scroll-mt-24 border-y border-zinc-900 bg-zinc-900/20 py-24 sm:py-32">
+        <section id="experience" className="scroll-mt-24 border-y border-zinc-900 bg-zinc-900/20 py-24 sm:py-32">
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:px-12">
+            <div>
+              <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Experience / 03</p>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-6xl">
+                Independent practice, documented proof.
+              </h2>
+              <p className="mt-6 max-w-xl text-base leading-8 text-zinc-400">
+                Over two years of self-directed design and frontend practice spanning product flows, visual identity systems, responsive React applications, and production deployments.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/resume" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300">
+                  View full résumé <FileText className="size-4" />
+                </Link>
+                <a href={personalInfo.socials.github} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-zinc-700 px-5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white">
+                  Review GitHub <SiGithub className="size-4" />
+                </a>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                ["2+ years", "Independent UI/UX, brand, and frontend practice"],
+                ["3 deep dives", "Documented methodology, ownership, constraints, and evidence boundaries"],
+                ["3 live builds", "Public React applications with accessible source repositories"],
+                ["End to end", "From product framing and visual systems through implementation and deployment"],
+              ].map(([value, label]) => (
+                <article key={value} className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-6">
+                  <p className="text-2xl font-semibold tracking-tight text-white">{value}</p>
+                  <p className="mt-3 text-sm leading-6 text-zinc-400">{label}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="capabilities" className="scroll-mt-24 py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
             <div className="max-w-3xl">
-              <p className="mb-4 text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Capabilities / 03</p>
+              <p className="mb-4 text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Capabilities / 04</p>
               <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white sm:text-6xl">Strategy to screen.<br />Design to deployment.</h2>
             </div>
             <div className="mt-16 grid border-t border-zinc-800 md:grid-cols-3 md:divide-x md:divide-zinc-800">

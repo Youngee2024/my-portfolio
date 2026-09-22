@@ -67,3 +67,13 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}
