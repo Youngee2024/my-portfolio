@@ -5,12 +5,16 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
+  Braces,
   BriefcaseBusiness,
   CalendarDays,
   CheckCircle2,
   ExternalLink,
   Info,
   Layers3,
+  MousePointer2,
+  Palette,
+  ScanLine,
   UserRound,
   UsersRound,
 } from "lucide-react";
@@ -28,6 +32,126 @@ const defaultRoles: Record<Project["category"], string> = {
 };
 
 const caseStudyProjects = portfolioData.filter(hasCompleteCaseStudy);
+
+const disciplineCopy: Record<Project["category"], {
+  eyebrow: string;
+  title: string;
+  description: string;
+}> = {
+  uiux: {
+    eyebrow: "Product evidence board",
+    title: "From uncertainty to confident action",
+    description: "A closer look at the flows, states, and interface decisions that make the experience usable.",
+  },
+  brand: {
+    eyebrow: "Identity evidence board",
+    title: "A system, not just a mark",
+    description: "The identity is shown in context: from the core visual language to the rules that keep every touchpoint coherent.",
+  },
+  frontend: {
+    eyebrow: "Build evidence board",
+    title: "Designed for the browser",
+    description: "The interface, responsive behavior, and implementation choices are considered as one connected system.",
+  },
+};
+
+function DisciplineEvidence({ project }: { project: Project }) {
+  const copy = disciplineCopy[project.category];
+  const isBrand = project.category === "brand";
+  const isFrontend = project.category === "frontend";
+  const icon = isBrand ? Palette : isFrontend ? Braces : MousePointer2;
+
+  return (
+    <section className="border-y border-zinc-900 bg-zinc-900/20 py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">
+              {(() => {
+                const Icon = icon;
+                return <Icon className="size-4 tracking-normal" aria-hidden="true" />;
+              })()}
+              {copy.eyebrow}
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-5xl">{copy.title}</h2>
+            <p className="mt-5 max-w-md leading-7 text-zinc-400">{copy.description}</p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="group rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 transition duration-300 hover:-translate-y-1 hover:border-violet-400/40">
+                <div className="mb-8 flex items-center justify-between text-xs text-zinc-500">
+                  <span>{isBrand ? "Core palette" : isFrontend ? "Component layer" : "Primary flow"}</span>
+                  <span className="font-mono text-violet-300">01</span>
+                </div>
+                {isBrand ? (
+                  <div className="grid grid-cols-4 gap-2" aria-label="Brand colour palette">
+                    {["#D9F99D", "#A7F3D0", "#C4B5FD", "#18181B"].map((color) => (
+                      <span key={color} className="aspect-square rounded-lg border border-white/10" style={{ backgroundColor: color }} />
+                    ))}
+                  </div>
+                ) : isFrontend ? (
+                  <div className="space-y-2 rounded-xl border border-white/8 bg-zinc-900 p-3 font-mono text-[11px] leading-5 text-zinc-500">
+                    <div><span className="text-violet-300">const</span> interface = <span className="text-emerald-300">responsive</span>;</div>
+                    <div className="pl-3 text-zinc-300">layout.scale(<span className="text-amber-200">&quot;fluid&quot;</span>)</div>
+                    <div className="text-zinc-600">{"// built for real screens"}</div>
+                  </div>
+                ) : (
+                  <div className="relative h-28 overflow-hidden rounded-xl border border-violet-300/20 bg-violet-400/10 p-3">
+                    <div className="absolute top-5 left-5 h-2 w-20 rounded-full bg-violet-300/70" />
+                    <div className="absolute top-12 left-5 h-2 w-32 rounded-full bg-zinc-700" />
+                    <div className="absolute right-5 bottom-5 h-10 w-10 rounded-full border border-cyan-300/50 bg-cyan-300/20" />
+                    <ScanLine className="absolute right-8 bottom-8 size-4 text-cyan-200" />
+                  </div>
+                )}
+                <p className="mt-4 text-sm font-medium text-zinc-200">{isBrand ? "A calm, human healthcare tone" : isFrontend ? "Reusable decisions become code" : "A clear route through the hardest task"}</p>
+                <p className="mt-2 text-xs leading-5 text-zinc-500">{project.tags.slice(0, 2).join(" · ")}</p>
+              </div>
+
+              <div className="group rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/40">
+                <div className="mb-8 flex items-center justify-between text-xs text-zinc-500">
+                  <span>{isBrand ? "Application test" : isFrontend ? "Responsive states" : "Decision comparison"}</span>
+                  <span className="font-mono text-cyan-300">02</span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-dashed border-zinc-700 bg-zinc-900/70 p-3">
+                    <span className="text-[10px] uppercase tracking-[0.16em] text-zinc-600">{isBrand ? "Before" : "Old"}</span>
+                    <div className="mt-5 h-10 rounded-md bg-zinc-800" />
+                    <div className="mt-2 h-2 w-3/4 rounded-full bg-zinc-800" />
+                  </div>
+                  <div className="rounded-xl border border-cyan-300/25 bg-cyan-300/8 p-3">
+                    <span className="text-[10px] uppercase tracking-[0.16em] text-cyan-200">{isBrand ? "After" : "Chosen"}</span>
+                    <div className="mt-5 h-10 rounded-md bg-gradient-to-br from-violet-300/60 to-cyan-300/50" />
+                    <div className="mt-2 h-2 w-3/4 rounded-full bg-cyan-200/50" />
+                  </div>
+                </div>
+                <p className="mt-4 text-sm font-medium text-zinc-200">{isBrand ? "Works across touchpoints" : isFrontend ? "One system, many widths" : "Reduce friction before adding polish"}</p>
+                <p className="mt-2 text-xs leading-5 text-zinc-500">Annotated comparison of the decision that shaped the final direction.</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 sm:p-6">
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="text-sm font-semibold text-zinc-100">Process trail</h3>
+                <span className="font-mono text-xs text-zinc-600">03 / 03</span>
+              </div>
+              <div className="mt-7 grid gap-0 sm:grid-cols-3">
+                {["Frame", "Explore", "Resolve"].map((step, index) => (
+                  <div key={step} className="relative border-l border-zinc-800 py-1 pl-5 sm:border-l-0 sm:border-t sm:pt-5 sm:pl-0 sm:pr-5">
+                    <span className="absolute -left-1.5 top-1 size-3 rounded-full border-2 border-zinc-950 bg-violet-300 sm:-top-1.5 sm:left-0" />
+                    <p className="font-mono text-xs text-violet-300">0{index + 1}</p>
+                    <p className="mt-2 text-sm font-medium text-zinc-200">{step}</p>
+                    <p className="mt-1 text-xs leading-5 text-zinc-500">{project.process?.[index] ?? "Refine the system against real constraints."}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function generateStaticParams() {
   return caseStudyProjects.map((project) => ({ slug: project.slug }));
@@ -83,7 +207,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
       <article className="relative">
         <section className="mx-auto max-w-7xl px-5 pt-20 pb-16 sm:px-8 sm:pt-28 lg:px-12">
-          <div className="max-w-5xl">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-1.5 text-xs font-medium text-violet-200">
                 {project.categoryLabel}
@@ -98,6 +222,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <p className="mt-8 max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl">
               {project.summary ?? project.description}
             </p>
+            <div className="hidden rounded-2xl border border-violet-400/20 bg-violet-400/8 p-5 lg:block">
+              <p className="font-mono text-xs text-violet-300">CASE / {String(projectIndex + 1).padStart(2, "0")}</p>
+              <p className="mt-6 text-sm leading-6 text-zinc-300">
+                A {project.category === "uiux" ? "product" : project.category === "brand" ? "visual identity" : "frontend"} story told through decisions, not just deliverables.
+              </p>
+              <div className="mt-6 h-px bg-violet-300/20" />
+              <p className="mt-3 text-xs text-zinc-500">Scroll to explore the evidence</p>
+            </div>
           </div>
 
           <div className="mt-14 grid gap-4 border-t border-zinc-800 pt-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -136,6 +268,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           </div>
         )}
+
+        <DisciplineEvidence project={project} />
 
         <section className="mx-auto grid max-w-7xl gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[0.65fr_1.35fr] lg:px-12 lg:py-32">
           <div>
