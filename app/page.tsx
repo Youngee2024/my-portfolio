@@ -73,30 +73,6 @@ const orderedPortfolioData = [...portfolioData].sort(
   (first, second) => projectOrder.indexOf(first.id) - projectOrder.indexOf(second.id),
 );
 
-const pillars = [
-  {
-    percentage: "60%",
-    title: "UI/UX & Product Design",
-    description: "Figma, User Research, Design Systems, Mobile & Web UX",
-    icon: PenTool,
-    accent: "from-violet-400 to-fuchsia-400",
-  },
-  {
-    percentage: "20%",
-    title: "Brand & Visual Identity",
-    description: "Logo Systems, Guidelines, Brand Strategy",
-    icon: Palette,
-    accent: "from-amber-300 to-orange-400",
-  },
-  {
-    percentage: "20%",
-    title: "Frontend & Technical Code",
-    description: "React, Tailwind CSS, Vercel Deployments",
-    icon: Code2,
-    accent: "from-cyan-300 to-emerald-400",
-  },
-];
-
 const capabilities = [
   {
     number: "01",
@@ -495,17 +471,17 @@ export default function Home() {
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-zinc-800 bg-zinc-900/55 p-5 shadow-2xl shadow-black/50">
                 <div className="flex h-full flex-col justify-between rounded-[1.25rem] border border-white/8 bg-[linear-gradient(145deg,#18181b_0%,#09090b_65%)] p-7">
                   <div className="flex items-center justify-between text-[10px] tracking-[0.2em] text-zinc-500 uppercase">
-                    <span>Creative profile</span><span>2026</span>
+                    <span>Design to build</span><span>2026</span>
                   </div>
                   <div>
-                    <div className="mb-7 flex items-end gap-2">
-                      <span className="text-8xl leading-none font-semibold tracking-[-0.08em] text-white">60</span>
-                      <span className="pb-2 text-2xl text-violet-300">%</span>
+                    <p className="text-[10px] font-medium tracking-[0.2em] text-violet-300 uppercase">From problem to product</p>
+                    <p className="mt-4 max-w-64 text-4xl leading-[1.05] font-semibold tracking-[-0.05em] text-white">Design with intent. Build with care.</p>
+                    <div className="mt-7 h-px bg-gradient-to-r from-violet-400 via-zinc-700 to-transparent" />
+                    <div className="mt-5 grid gap-3 text-xs text-zinc-400">
+                      <span><span className="mr-3 font-mono text-violet-300">01</span>Understand the context</span>
+                      <span><span className="mr-3 font-mono text-violet-300">02</span>Shape a coherent system</span>
+                      <span><span className="mr-3 font-mono text-violet-300">03</span>Deliver the experience</span>
                     </div>
-                    <div className="h-px bg-gradient-to-r from-violet-400 via-zinc-700 to-transparent" />
-                    <p className="mt-5 max-w-48 text-sm leading-6 text-zinc-400">
-                      Thoughtful design, grounded in people and built to perform.
-                    </p>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex -space-x-2">
@@ -518,21 +494,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="border-y border-zinc-900 bg-zinc-950/70">
-          <div className="mx-auto grid max-w-7xl divide-y divide-zinc-900 px-5 sm:px-8 md:grid-cols-3 md:divide-x md:divide-y-0 lg:px-12">
-            {pillars.map(({ percentage, title, description, icon: Icon, accent }) => (
-              <article key={title} className="group py-9 md:px-7 md:first:pl-0 md:last:pr-0 lg:px-10">
-                <div className="mb-7 flex items-start justify-between">
-                  <span className={`bg-gradient-to-r ${accent} bg-clip-text text-4xl font-semibold tracking-[-0.05em] text-transparent`}>{percentage}</span>
-                  <Icon className="size-5 text-zinc-600 transition group-hover:text-zinc-300" />
-                </div>
-                <h2 className="text-sm font-semibold text-zinc-100">{title}</h2>
-                <p className="mt-2 text-sm leading-6 text-zinc-400">{description}</p>
-              </article>
-            ))}
           </div>
         </section>
 
@@ -638,48 +599,45 @@ export default function Home() {
                 <h2 className="text-4xl font-semibold tracking-[-0.04em] text-zinc-100 sm:text-6xl">About &amp; Philosophy</h2>
               </div>
               <span className="w-fit rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-2 text-xs font-medium text-violet-200">
-                The 60/20/20 Approach
+                How I work
               </span>
             </div>
 
             <p className="mt-12 max-w-5xl text-2xl leading-snug font-medium tracking-[-0.025em] text-zinc-100 sm:text-4xl sm:leading-tight">
-              {personalInfo.bio}
+              I treat design and implementation as one continuous problem-solving process: clarify what matters, shape a coherent system, and carry that intent through to the final interface.
             </p>
 
             <div className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-              <div className="grid gap-4 md:grid-cols-3">
-                <article className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-violet-400/35">
-                  <div className="flex items-center justify-between">
-                    <span className="text-3xl font-semibold tracking-[-0.05em] text-violet-300">60%</span>
-                    <PenTool className="size-5 text-zinc-600 transition group-hover:text-violet-300" />
-                  </div>
-                  <h3 className="mt-10 text-lg font-semibold text-zinc-100">UI/UX &amp; Product Design</h3>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">
-                    User research, wireframing, high-fidelity Figma prototypes, and durable design systems that keep products intuitive and consistent.
-                  </p>
-                </article>
-
-                <article className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-amber-400/35">
-                  <div className="flex items-center justify-between">
-                    <span className="text-3xl font-semibold tracking-[-0.05em] text-amber-300">20%</span>
-                    <Palette className="size-5 text-zinc-600 transition group-hover:text-amber-300" />
-                  </div>
-                  <h3 className="mt-10 text-lg font-semibold text-zinc-100">Brand &amp; Visual Systems</h3>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">
-                    Visual identity, logo design, typography, and strategic brand positioning that make every touchpoint feel unmistakably connected.
-                  </p>
-                </article>
-
-                <article className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/35">
-                  <div className="flex items-center justify-between">
-                    <span className="text-3xl font-semibold tracking-[-0.05em] text-cyan-300">20%</span>
-                    <Code2 className="size-5 text-zinc-600 transition group-hover:text-cyan-300" />
-                  </div>
-                  <h3 className="mt-10 text-lg font-semibold text-zinc-100">Frontend Execution</h3>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">
-                    Translating design components into clean, responsive React, Next.js, and Tailwind CSS code built for real-world use.
-                  </p>
-                </article>
+              <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40">
+                {[
+                  {
+                    number: "01",
+                    title: "Start with the problem",
+                    description: "Understand the people, context, constraints, and decisions that matter before polishing the interface.",
+                    icon: PenTool,
+                  },
+                  {
+                    number: "02",
+                    title: "Build the system, not the screen",
+                    description: "Create reusable visual and interaction patterns that keep products and brands coherent as they grow.",
+                    icon: Palette,
+                  },
+                  {
+                    number: "03",
+                    title: "Close the design–code gap",
+                    description: "Carry intent into responsive, accessible implementation so the delivered experience matches the design promise.",
+                    icon: Code2,
+                  },
+                ].map(({ number, title, description, icon: Icon }) => (
+                  <article key={number} className="grid gap-5 border-b border-zinc-800 p-6 last:border-b-0 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-start sm:p-7">
+                    <span className="font-mono text-xs text-violet-300">{number}</span>
+                    <div>
+                      <h3 className="text-lg font-semibold text-zinc-100">{title}</h3>
+                      <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">{description}</p>
+                    </div>
+                    <Icon className="size-5 text-zinc-500" />
+                  </article>
+                ))}
               </div>
 
               <aside className="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
