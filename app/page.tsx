@@ -607,7 +607,7 @@ export default function Home() {
               I treat design and implementation as one continuous problem-solving process: clarify what matters, shape a coherent system, and carry that intent through to the final interface.
             </p>
 
-            <div className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="mt-14 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
               <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40">
                 {[
                   {
