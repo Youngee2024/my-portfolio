@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
@@ -29,17 +30,29 @@ export default function ResumePage() {
 
       <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
         <section className="border-b border-zinc-800 pb-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-end">
             <div>
               <p className="text-xs font-medium tracking-[0.2em] text-violet-300 uppercase">Résumé / Portfolio profile</p>
               <h1 className="mt-5 text-4xl font-semibold tracking-[-0.045em] text-white sm:text-6xl">{personalInfo.name}</h1>
               <p className="mt-4 text-xl text-zinc-300">{personalInfo.role}</p>
               <p className="mt-6 max-w-3xl text-base leading-8 text-zinc-400">{personalInfo.bio}</p>
             </div>
-            <div className="grid shrink-0 gap-2 text-sm text-zinc-300">
-              <span className="flex min-h-11 items-center gap-2"><MapPin className="size-4 text-violet-300" />{personalInfo.location}</span>
-              <a href={`mailto:${personalInfo.email}`} className="flex min-h-11 items-center gap-2 transition hover:text-white"><Mail className="size-4 text-violet-300" />{personalInfo.email}</a>
-              <a href={`tel:${personalInfo.phone}`} className="flex min-h-11 items-center gap-2 transition hover:text-white"><Phone className="size-4 text-violet-300" />{personalInfo.phone}</a>
+            <div className="grid gap-6 sm:grid-cols-[7rem_minmax(0,1fr)] sm:items-end lg:grid-cols-1">
+              <div className="relative aspect-[4/5] w-28 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-xl shadow-black/20">
+                <Image
+                  src="/images/ibraheem-passport.jpeg"
+                  alt="Headshot of Ibraheem Olawale"
+                  fill
+                  quality={88}
+                  sizes="112px"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="grid shrink-0 gap-2 text-sm text-zinc-300">
+                <span className="flex min-h-11 items-center gap-2"><MapPin className="size-4 shrink-0 text-violet-300" />{personalInfo.location}</span>
+                <a href={`mailto:${personalInfo.email}`} className="flex min-h-11 items-center gap-2 break-all transition hover:text-white"><Mail className="size-4 shrink-0 text-violet-300" />{personalInfo.email}</a>
+                <a href={`tel:${personalInfo.phone}`} className="flex min-h-11 items-center gap-2 transition hover:text-white"><Phone className="size-4 shrink-0 text-violet-300" />{personalInfo.phone}</a>
+              </div>
             </div>
           </div>
         </section>

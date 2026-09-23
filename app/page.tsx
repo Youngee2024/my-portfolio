@@ -640,39 +640,56 @@ export default function Home() {
                 ))}
               </div>
 
-              <aside className="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-                <p className="text-xs font-medium tracking-[0.16em] text-zinc-400 uppercase">Quick info</p>
-                <div className="mt-7 flex items-start gap-3 border-b border-zinc-800 pb-6">
+              <aside className="group flex flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50">
+                <figure className="relative aspect-[4/5] overflow-hidden border-b border-zinc-800 bg-zinc-900">
+                  <Image
+                    src="/images/ibraheem-portrait.png"
+                    alt="Portrait of Ibraheem Olawale"
+                    fill
+                    quality={88}
+                    sizes="(max-width: 1024px) 100vw, 320px"
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/75 via-transparent to-transparent" />
+                  <figcaption className="absolute right-5 bottom-5 left-5">
+                    <p className="text-sm font-semibold text-white">Ibraheem Olawale</p>
+                    <p className="mt-1 text-xs text-zinc-300">Designer &amp; frontend builder</p>
+                  </figcaption>
+                </figure>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-xs font-medium tracking-[0.16em] text-zinc-400 uppercase">Quick info</p>
+                  <div className="mt-7 flex items-start gap-3 border-b border-zinc-800 pb-6">
                   <MapPin className="mt-0.5 size-4 shrink-0 text-violet-300" />
                   <div>
                     <p className="text-xs text-zinc-400">Based in</p>
                     <p className="mt-1 text-sm font-medium text-zinc-100">{personalInfo.location}</p>
                   </div>
-                </div>
-                <div className="py-6">
-                  <p className="text-xs text-zinc-400">Core design &amp; dev stack</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {["Figma", "React", "Next.js", "Tailwind CSS", "Framer", "Vercel"].map((tool) => (
-                      <span key={tool} className="rounded-md border border-zinc-800 bg-zinc-950/70 px-2.5 py-1.5 text-[11px] text-zinc-300">
-                        {tool}
-                      </span>
-                    ))}
                   </div>
-                </div>
-                <div className="mt-auto grid gap-3">
-                  <Link
-                    href="/resume"
-                    className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white"
-                  >
-                    View Résumé <FileText className="size-4" />
-                  </Link>
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300"
-                  >
-                    Get in Touch
-                    <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
+                  <div className="py-6">
+                    <p className="text-xs text-zinc-400">Core design &amp; dev stack</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {["Figma", "React", "Next.js", "Tailwind CSS", "Framer", "Vercel"].map((tool) => (
+                        <span key={tool} className="rounded-md border border-zinc-800 bg-zinc-950/70 px-2.5 py-1.5 text-[11px] text-zinc-300">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-auto grid gap-3">
+                    <Link
+                      href="/resume"
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white"
+                    >
+                      View Résumé <FileText className="size-4" />
+                    </Link>
+                    <a
+                      href={`mailto:${personalInfo.email}`}
+                      className="group/button inline-flex h-11 items-center justify-center gap-2 rounded-full bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 transition hover:bg-violet-300"
+                    >
+                      Get in Touch
+                      <ArrowUpRight className="size-4 transition-transform group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
+                    </a>
+                  </div>
                 </div>
               </aside>
             </div>
